@@ -1,0 +1,102 @@
+.app-header {
+    position: relative;
+}
+
+.add-new {
+    position: absolute;
+    top: 8px;
+    right: 25px;
+}
+
+.app-header .visit-site {
+    position: absolute;
+    top: 5px;
+    left: 25px;
+}
+
+.main-container {
+    background-color: #FFFFFF;
+    padding: 20px;
+}
+
+.required label {
+    position: relative;
+    padding-left: 10px;
+}
+
+.required label::before {
+    position: absolute;
+    content: '*';
+    color: #e63f1e;
+    font-size: 24px;
+    left: 0;
+    top: 50%;
+    margin-top: -12px;
+}
+
+.fluid-img {
+    max-width: 100%;
+    height: auto;
+}
+
+.file-wrapper {
+    max-height: 250px;
+    max-width: 250px;
+}
+
+.file-container {
+    margin-bottom: 20px;
+}
+
+.language-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    float: right;
+}
+
+.language-list li {
+    display: inline-block;
+    margin-top: 5px;
+    margin-left: 10px;
+}
+
+.margin-right-small {
+    margin-right: 10px;
+}
+
+.margin-bottom-m {
+    margin-bottom: 20px;
+}
+
+.margin-top-remove {
+    margin-top: 0;
+}
+
+.input-append {
+    display: inline-block;
+}
+
+.no-items td {
+    border: none;
+    background-color: white;
+    text-align: center;
+}
+
+.alert-fixed {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    text-align: center;
+}
+
+.position-relative {
+    position: relative;
+}
+
+.my-card {
+    background: rgba(115, 115, 115, 0.08);
+    border-radius: 5px;
+    padding: 15px 25px;
+}

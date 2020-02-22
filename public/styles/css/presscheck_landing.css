@@ -1,0 +1,72 @@
+#contact
+{
+    /*background: #303030;*/
+    color: #707070;
+    padding: 80px 0 80px 0;
+}
+#contact h2 { font-weight: 400; }
+#contact .text-center p { padding: 0 0 60px 0; }
+#contact h2, #contact h3 { padding: 0 0 20px 0; }
+#contact .form-control
+{
+    background: #fff;
+    border: 1px solid #eaeaea;
+    border-radius: 0px;
+    color: #707070;
+    margin: 10px 0 10px 0;
+    box-shadow: none;
+}
+.contact-form .btn {
+    margin-top: 10px;
+}
+.contact-form a {
+    color: #707070;
+}
+
+#contact input { height: 60px; }
+#contact .form-control:focus, .form-control:focus
+{
+    /*background: #444444;*/
+    border-color: transparent;
+    box-shadow: inset 0 0px 0px rgba(0,0,0,.075), inset 0 0 4px rgba(19, 103, 206, 0.59);
+}
+/*#contact input[type="submit"]*/
+/*{*/
+/*	color: #FFF;*/
+/*	font-weight: 600;*/
+/*	letter-spacing: 1px;*/
+/*	width: 220px;*/
+/*	-webkit-transition: all 0.4s ease;*/
+/*	transition: all 0.4s ease;*/
+/*}*/
+/*#contact input[type="submit"]:hover*/
+/*{*/
+/*	background: #1154CE;*/
+/*	border-color: transparent;*/
+/*	color: #FFF;*/
+/*}*/
+#contact .address
+{
+    padding: 20px;
+    padding-top: 0;
+    margin: 0;
+}
+#contact .fa
+{
+    color: #1154CE;
+    font-size: 20px;
+    padding: 6px 10px 6px 0;
+}
+
+.about-us .section-title img {
+    transition: all 0.5s;
+}
+.about-us .section-title:hover img {
+    transform: scale(1.1);
+}
+.about-us-category {
+    font-family: "Segoe UI", sans-serif;
+    font-size: 24px;
+    font-weight: bold;
+    line-height: 32px;
+}

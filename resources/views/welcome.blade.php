@@ -251,62 +251,6 @@
                 <div class="owl-carousel owl-theme">
 
 
-                @foreach ($reviews as $review)
-                    <div class="item">
-                        <div>
-                            <div class="col-md-12 margin-20">
-                                <div class="col-sm-12 col-md-2 reviews-mark d-flex ">
-                                    <img class="reviews-chart" src="{{asset('styles/images/gauge/semisphere-3-01.svg')}}">
-                                    <h4>6 / 10</h4>
-                                </div>
-                                <div class="col-sm-12 col-md-10 reviews-description">
-                                    <div class="review-website">{{$review->media->title}}
-                                        <a href="https://www.zdg.md/">{{$review->media->url}}</a>
-                                    </div>
-                                    <p>{{$review->media->description}}</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="review-criterias">
-                            <ul class="criteria-columns">
-                                <div class="criteria-first-column">
-                                    @foreach ($criterias as $key => $criteria)
-                                        @if ($key <= 4)
-                                        <li>
-                                            @if (in_array($criteria->id, $review->criterias->pluck('id')->toArray()))
-                                                <img src="{{asset('styles/images/Group 289.svg')}}">
-                                            @else
-                                                <img src="{{asset('styles/images/Group 345.svg')}}">
-                                            @endif
-                                            <span class="review-criteria">
-                                                {{$criteria->title}}
-                                            </span>
-                                        </li>
-                                        @endif
-                                    @endforeach
-
-                                </div>
-                                <div class="criteria-second-column">
-                                    @foreach ($criterias as $key => $criteria)
-                                        @if ($key > 4)
-                                            <li>
-                                                @if (in_array($criteria->id, $review->criterias->pluck('id')->toArray()))
-                                                    <img src="{{asset('styles/images/Group 289.svg')}}">
-                                                @else
-                                                    <img src="{{asset('styles/images/Group 345.svg')}}">
-                                                @endif
-                                                <span class="review-criteria">
-                                                    {{$criteria->title}}
-                                            </span>
-                                            </li>
-                                        @endif
-                                    @endforeach
-                                </div>
-                            </ul>
-                        </div>
-                    </div>
-                @endforeach
 {{--                    <div class="item">--}}
 {{--                        <div>--}}
 {{--                            <div class="col-md-12 margin-20">--}}

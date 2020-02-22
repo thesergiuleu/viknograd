@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\InlineBlock;
+use App\Libraries\Uploader\UploaderClass;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
@@ -62,7 +64,7 @@ class AdminBaseController extends Controller
      */
     protected $limit = 20;
 
-    protected $redirectBack = '/admin/review';
+    protected $redirectBack = '/admin/page';
 
     protected $addNewItemRoute = '';
 
@@ -82,6 +84,7 @@ class AdminBaseController extends Controller
     {
         $this->viewData['pages']            = config('admin.pages');
         $this->viewData['activeRoute']      = $this->extractEntityFromRoute(Route::currentRouteName());
+        $this->viewData['entity']           = $this->entity;
         $this->gridData['showSearch']       = false;
         $this->gridData['filterAttributes'] = [];
         $this->redirectBack                 = '/admin/' . $this->entity;

@@ -7,6 +7,8 @@
               href="{{ asset('assets/libraries/bootstrap-datetimepicker-master/build/css/bootstrap-datetimepicker.min.css') }}"/>
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/app.css') }}"/>
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/main.css') }}"/>
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/js/summernote/summernote.css') }}"/>
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/file_manager.css') }}"/>
         <script src="{{ asset('assets/js/app.js') }}"></script>
     @show
 
@@ -25,6 +27,8 @@
 </div>
 @include("admin.common.footer")
 @section('footer-scripts')
+
+    <script src="{{ asset('assets/js/summernote/summernote.js') }}"></script>
     <script src="{{ asset('assets/js/admin_functions.js') }}"></script>
 @show
 </body>

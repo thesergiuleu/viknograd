@@ -37,7 +37,7 @@ return [
     | may even configure multiple disks of the same driver. Defaults have
     | been setup for each driver as an example of the required options.
     |
-    | Supported Drivers: "local", "ftp", "sftp", "s3", "rackspace"
+    | Supported Drivers: "local", "ftp", "s3", "rackspace"
     |
     */
 
@@ -51,7 +51,7 @@ return [
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
-            'url' => env('APP_URL').'/storage',
+            'url' => env('URL').'/storage',
             'visibility' => 'public',
         ],
 
@@ -61,9 +61,24 @@ return [
             'secret' => env('AWS_SECRET_ACCESS_KEY'),
             'region' => env('AWS_DEFAULT_REGION'),
             'bucket' => env('AWS_BUCKET'),
-            'url' => env('AWS_URL'),
         ],
 
+    ],
+
+    'file_mimes' => [
+        'text/csv'                                       => 'file',
+        'application/msword'                             => 'file',
+        'image/gif'                                      => 'image',
+        'image/x-icon'                                   => 'image',
+        'image/jpeg'                                     => 'image',
+        'image/png'                                      => 'image',
+        'application/pdf'                                => 'file',
+        'application/vnd.ms-powerpoint'                  => 'file',
+        'application/xml'                                => 'xml',
+        'application/json'                               => 'file',
+        'application/vnd.ms-excel'                       => 'file',
+        'application/vnd.ms-office'                      => 'file',
+        'application/vnd.openxmlformats-officedocument.wordprocessingml.document' => 'file'
     ],
 
 ];

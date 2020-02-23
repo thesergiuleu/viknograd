@@ -6,6 +6,7 @@ use App\Attachment;
 use App\InlineBlock;
 use App\Libraries\Uploader\UploaderClass;
 use App\Page;
+use App\Video;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -61,7 +62,7 @@ class PageController extends AdminBaseController
     {
         if ($this->request->has('inline_blocks')) {
             foreach ($this->request->get('inline_blocks') as $key => $inlineBlock) {
-                $block = $item->inlineBlocks()->create($inlineBlock);
+                $block = $item->inline_blocks()->create($inlineBlock);
                 $file = $this->request->file('inline_blocks');
                 if (array_key_exists($key, $file)) {
                     $entity = [
@@ -69,7 +70,7 @@ class PageController extends AdminBaseController
                         'entity_id'   => $block->id,
                         'position'    => 'top'
                     ];
-                    $this->uploader->setDirectory('inline_block_' . $block->id);
+                    $this->uploader->setDirectory('inline_blocks_' . $block->id);
                     $this->uploader->storeFile($file[$key]['attachments'], $entity);
                 }
             }
@@ -86,10 +87,85 @@ class PageController extends AdminBaseController
                     'entity_id'   => $item->id,
                     'position'    => 'top'
                 ];
-                $this->uploader->setDirectory('page_' . $item->id);
+                $this->uploader->setDirectory('pages_' . $item->id);
                 $this->uploader->storeFile($attachment, $entity);
             }
         }
         $item->apiMenuItem()->create(['page_id' => $item->id]);
+    }
+
+    /**
+     * Doing some data operations after updating
+     * @param  object $item
+     * @return void
+     */
+    protected function afterUpdateHook($item)
+    {
+        if ($this->request->hasFile('attachments')) {
+            foreach ($this->request->file('attachments') as $attachment) {
+                $entity = [
+                    'entity_type' => Page::class,
+                    'entity_id'   => $item->id,
+                    'position'    => 'top'
+                ];
+                $this->uploader->setDirectory('pages_' . $item->id);
+                $this->uploader->storeFile($attachment, $entity);
+            }
+        }
+        $this->handlePNActions($item, 'inline_blocks', InlineBlock::class);
+
+        $this->handlePNActions($item, 'videos', Video::class);
+    }
+
+    /**
+     * handle the create update delete for proofs and naratives
+     *
+     * @param $item
+     * @param string $relation
+     * @param string $class
+     */
+    protected function handlePNActions($item, $relation = 'inline_blocks', $class = 'App\InlineBlock')
+    {
+        if (!$this->request->has($relation))
+            $this->request[$relation] = [];
+
+        $oldData     = $item->{$relation}->toArray();
+        $sortedData  = crudPartition($oldData, $this->request[$relation]);
+        foreach ($sortedData['update'] as $update) {
+            foreach ($this->request->get($relation) as $key => $value) {
+                $file = $this->request->file($relation);
+                if ( $file && array_key_exists($key, $file) ) {
+                    $entity = [
+                        'entity_type' => $class,
+                        'entity_id'   => $update['id'],
+                        'position'    => 'top'
+                    ];
+                    $this->uploader->setDirectory($relation . '_' . $update['id']);
+                    $this->uploader->storeFile($file[$key]['attachments'], $entity);
+                }
+            }
+            unset($update['id']);
+            unset($update['attachments']);
+            $item->$relation()->update($update);
+
+        }
+        foreach ($sortedData['create'] as $create) {
+            $created = $item->$relation()->create($create);
+            foreach ($this->request->get($relation) as $key => $value) {
+                $file = $this->request->file($relation);
+                if ( $file && array_key_exists($key, $file) ) {
+                    $entity = [
+                        'entity_type' => $class,
+                        'entity_id'   => $created->id,
+                        'position'    => 'top'
+                    ];
+                    $this->uploader->setDirectory($relation . '_' . $created->id);
+                    $this->uploader->storeFile($file[$key]['attachments'], $entity);
+                }
+            }
+        }
+        foreach ($sortedData['delete'] as $delete) {
+            $item->$relation()->whereId($delete['id'])->delete();
+        }
     }
 }

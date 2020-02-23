@@ -17,6 +17,7 @@ class CreateInlineBlocksTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('page_id');
             $table->string('name');
+            $table->string('url')->nullable();
             $table->text('body')->nullable();
             $table->timestamps();
 

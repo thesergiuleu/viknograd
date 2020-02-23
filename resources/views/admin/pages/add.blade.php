@@ -63,8 +63,8 @@
                 <label for="exampleInputLogo">{{trans("forms.$entity.attachments")}}</label>
                 <div id="file-container">
                     @component('admin.form_elements.simple_file_input', [
-                     'fileInstance' =>  false,
-                     'inputName' => 'attachments[]',
+                     'fileInstances' =>  false,
+                     'inputName' => 'attachments',
                      ])
 
                     @endcomponent

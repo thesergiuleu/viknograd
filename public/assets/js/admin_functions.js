@@ -15,6 +15,10 @@ const elements = function (counter, name) {
             '<label>Body</label>'+
             `<textarea id="${name}_${counter}" type="text" name="${name}[${counter}][body]" class="form-control"></textarea>`+
             '</div>'+
+            '<div class="form-group">'+
+            '<label>Link</label>'+
+            `<input class="form-control" type="text" name="${name}[${counter}][url]">`+
+            '</div>'+
             '<div class="form-group required">'+
             '<label>Attachment</label>'+
             `<input type="file" name="${name}[${counter}][attachments]" class="form-control-file" />`+
@@ -94,6 +98,8 @@ function removeReviewSection(element) {
     let row = {};
     if (element.dataset.data === 'inline_blocks') {
         row = document.getElementById('inline-block-div');
+    } else if (element.dataset.data === 'videos') {
+        row = document.getElementById('video-div');
     }
     if (row.contains(element)) {
         const col = row.querySelector(`[data-counter*='${element.dataset.id}']`);

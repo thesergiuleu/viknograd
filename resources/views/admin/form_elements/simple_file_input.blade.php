@@ -1,18 +1,18 @@
-@if ($fileInstance)
-
-    <div class="row file-container">
+@if ($fileInstances)
+    <div class="row">
+    @foreach($fileInstances as $fileInstance)
         <div class="col-md-4">
-            <img src="{{asset('storage/'.$fileInstance->file)}}" alt="" class="img-rounded fluid-img">
-        </div>
-        <div class="col-md-8">
-            <div class="pull-right">
-                @authorize
-                    <button type="button" class="btn btn-danger" onclick="replaceImage('{{route("upload.delete", ["id" => $fileInstance->id])}}', '{{$inputName}}', '{{$reloadPage}}')">
-                        {{trans('actions.replace')}}
-                    </button>
-                @endauthorize
+            <div class="form-group">
+                <div class="pull-left">
+                    <button type="submit" class="btn btn-danger">{{trans('actions.remove')}}</button>
+                </div>
+            </div>
+            <br>
+            <div class="form-control-file">
+                <img src="{{asset('storage/'.$fileInstance->file)}}" alt="" class="img-rounded fluid-img">
             </div>
         </div>
+    @endforeach
     </div>
 @else
     <input type="file" name="{{$inputName}}" multiple class="form-control-file" id="exampleInput{{$inputName}}" />

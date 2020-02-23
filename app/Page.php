@@ -47,7 +47,7 @@ class Page extends Model
     /**
      * @return HasMany
      */
-    public function inlineBlocks()
+    public function inline_blocks()
     {
         return $this->hasMany(InlineBlock::class);
     }

@@ -15,7 +15,7 @@
             minHeight: null,             // set minimum height of editor
             maxHeight: null,             // set maximum height of editor
             focus: true,
-            fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', 'Carlito'],
+            fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', 'Carlito', 'Open Sans'],
             toolbar: [
                 // [groupName, [list of button]]
                 ['style', ['bold', 'italic', 'underline', 'clear']],

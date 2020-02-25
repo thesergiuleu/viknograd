@@ -15,6 +15,10 @@ class ApiController extends Controller
 
     public function menuItems()
     {
-        return response()->json(ApiMenuItem::all());
+        $menuItems = ApiMenuItem::with('page')->get();
+        foreach ($menuItems as $menuItem) {
+            $menuItem->name = $menuItem->page->name;
+        }
+        return response()->json($menuItems);
     }
 }

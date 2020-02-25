@@ -27,7 +27,6 @@
 </div>
 @include("admin.common.footer")
 @section('footer-scripts')
-
     <script src="{{ asset('assets/js/summernote/summernote.js') }}"></script>
     <script src="{{ asset('assets/js/admin_functions.js') }}"></script>
 @show

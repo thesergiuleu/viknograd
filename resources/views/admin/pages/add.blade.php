@@ -6,6 +6,7 @@
     <main class="main-container">
         <form method="post" action="{{route($entity . '.store')}}" enctype="multipart/form-data">
             {{ csrf_field() }}
+            <input type="hidden" name="page_block" value="{{$page_block}}">
             <div class="form-group required">
                 <label>{{trans("forms.$entity.name")}}</label>
                 <input type="text" name="name" class="form-control">

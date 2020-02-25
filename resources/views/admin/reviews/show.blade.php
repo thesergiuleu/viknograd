@@ -71,7 +71,7 @@
                     {{--<button type="button" onclick="addReviewSection('proofs')" class="btn btn-primary">{{trans('actions.add')}}</button>--}}
                 {{--</div>--}}
             {{--</div>--}}
-            <h3>{{trans('forms.review.naratives')}}</h3>
+            <h3>{{trans('forms.review.inline_blocks')}}</h3>
             <div class="row" id="narative-div">
                 @foreach($item->naratives as $key => $narative)
                     <div class="col-md-12">
@@ -92,7 +92,7 @@
             </div>
             {{--<div class="form-group clearfix">--}}
                 {{--<div class="pull-left">--}}
-                    {{--<button type="button" onclick="addReviewSection('naratives')" class="btn btn-primary">{{trans('actions.add')}}</button>--}}
+                    {{--<button type="button" onclick="addReviewSection('inline_blocks')" class="btn btn-primary">{{trans('actions.add')}}</button>--}}
                 {{--</div>--}}
             {{--</div>--}}
             {{--<div class="form-group clearfix">--}}

@@ -37,7 +37,7 @@
         && $gridData['actionsDisplay']['edit']
         )
 
-                <a href="{{route($route.'.edit', ['id' => $item->id ])}}">
+                <a href="{{route($route.'.edit', ['id' => $item->id , 'page_block' => $gridData['page_block']])}}">
                     <i class="glyphicon glyphicon-edit"></i>
                 </a>
 

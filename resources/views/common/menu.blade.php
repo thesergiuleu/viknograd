@@ -36,7 +36,7 @@
 
                                 </ul>
                             @else
-                                <a href="{{route($page['ext'])}}">{{$page['title']}}</a>
+                                <a href="{{route($page['ext'], $page['id'])}}">{{$page['title']}}</a>
                             @endif
                         </li>
                     @endforeach

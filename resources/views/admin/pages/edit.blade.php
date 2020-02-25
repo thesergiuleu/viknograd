@@ -6,6 +6,7 @@
     <main class="main-container">
         <form method="post" action="{{route($entity . '.update', $item->id)}}" enctype="multipart/form-data">
             <input type="hidden" name="_method" value="PUT"/>
+            <input type="hidden" name="page_block" value="{{$page_block}}">
             {{ csrf_field() }}
             <div class="form-group required">
                 <label>{{trans("forms.$entity.name")}}</label>

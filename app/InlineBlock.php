@@ -30,6 +30,8 @@ use Illuminate\Support\Carbon;
  * @method static Builder|InlineBlock wherePageId($value)
  * @method static Builder|InlineBlock whereUpdatedAt($value)
  * @mixin Eloquent
+ * @property string|null $url
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\InlineBlock whereUrl($value)
  */
 class InlineBlock extends Model
 {

@@ -31,10 +31,21 @@ use Illuminate\Support\Carbon;
  * @method static Builder|Page whereUpdatedAt($value)
  * @method static Builder|Page whereUrl($value)
  * @mixin Eloquent
+ * @property string $name
+ * @property int|null $page_block
+ * @property-read \App\ApiMenuItem $apiMenuItem
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\InlineBlock[] $inline_blocks
+ * @property-read int|null $inline_blocks_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Video[] $videos
+ * @property-read int|null $videos_count
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Page whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Page wherePageBlock($value)
  */
 class Page extends Model
 {
-    protected $fillable = ['name', 'url', 'body'];
+    protected $fillable = ['name', 'url', 'body', 'page_block'];
+
+    const PROJECTS = 1;
 
     /**
      * Get upload relation.

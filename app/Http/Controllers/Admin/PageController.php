@@ -118,7 +118,7 @@ class PageController extends AdminBaseController
     }
 
     /**
-     * handle the create update delete for proofs and naratives
+     * handle the create update delete for proofs and inline_blocks
      *
      * @param $item
      * @param string $relation

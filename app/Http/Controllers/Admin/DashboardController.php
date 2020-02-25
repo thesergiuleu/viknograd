@@ -23,9 +23,10 @@ class DashboardController extends AdminBaseController
     /**
      * Show the application dashboard.
      *
+     * @param null $page_block
      * @return Factory|View
      */
-    public function index()
+    public function index($page_block = null)
     {
         return view('dashboard', $this->viewData);
     }

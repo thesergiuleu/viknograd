@@ -70,6 +70,8 @@ class AdminBaseController extends Controller
 
     protected $entity = '';
 
+    protected $page_block;
+
     protected $sortColumn = 'id';
 
     protected $sortOrder = 'desc';
@@ -84,9 +86,16 @@ class AdminBaseController extends Controller
     {
         $this->viewData['pages']            = config('admin.pages');
         $this->viewData['activeRoute']      = $this->extractEntityFromRoute(Route::currentRouteName());
+        $url = request()->url();
+        preg_match("/\/(\d+)$/",$url,$matches);
+        if (!empty($matches)) {
+            $this->setPageId($matches[1]);
+        }
         $this->viewData['entity']           = $this->entity;
+        $this->viewData['page_block']          = $this->page_block;
         $this->gridData['showSearch']       = false;
         $this->gridData['filterAttributes'] = [];
+        $this->gridData['page_block']          = $this->page_block;
         $this->redirectBack                 = '/admin/' . $this->entity;
 
         if($this->request->has('orderColumn')) {
@@ -96,13 +105,20 @@ class AdminBaseController extends Controller
         $this->setSorting();
 
     }
+
+    public function setPageId($page_block)
+    {
+        $this->page_block = $page_block;
+    }
     /**
      * Display a listing of the resource.
      *
+     * @param $page_block
      * @return Factory|JsonResponse|View
      */
-    public function index()
+    public function index($page_block = null)
     {
+        $this->setPageId($page_block);
         $this->beforeInitPaginateHook();
         $this->viewData['items']    = $this->model->orderBy($this->sortColumn, $this->sortOrder)->paginate($this->limit);
         $this->afterInitPaginateHook();
@@ -122,10 +138,12 @@ class AdminBaseController extends Controller
     /**
      * Display a add new item form.
      *
+     * @param null $page_block
      * @return Factory|View
      */
-    public function add()
+    public function add($page_block = null)
     {
+        $this->setPageId($page_block);
         $this->beforeSetAddFormHook();
 
         return view($this->entityViews['add'], $this->viewData);
@@ -157,7 +175,7 @@ class AdminBaseController extends Controller
 
         $session = session()->all();
         $routeSuffix = session()->has('query_string') ? '?'.implode('&', $session['query_string']):'';
-        return redirect($this->redirectBack.$routeSuffix)->with('message', [
+        return redirect($this->redirectBack . '/' . $post['page_block'] . $routeSuffix)->with('message', [
             'msg'  => $response['message'],
             'type' => 'success',
         ]);
@@ -166,12 +184,14 @@ class AdminBaseController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int $id
+     * @param int $id
      *
+     * @param null $page_block
      * @return Factory|Response|View
      */
-    public function edit($id)
+    public function edit($id, $page_block = null)
     {
+        $this->setPageId($page_block);
         $this->viewData['item'] = $this->model->findOrFail($id);
         $this->beforeSetEditFormHook($id);
         return view($this->entityViews['edit'], $this->viewData);
@@ -223,7 +243,7 @@ class AdminBaseController extends Controller
 
         $session = session()->all();
         $routeSuffix = session()->has('query_string') ? '?'.implode('&', $session['query_string']):'';
-        return redirect($this->redirectBack.$routeSuffix)->with('message', [
+        return redirect($this->redirectBack. '/' . $put['page_block'] . $routeSuffix)->with('message', [
             'msg'  => $response['message'],
             'type' => 'success',
         ]);

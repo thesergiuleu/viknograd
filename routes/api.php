@@ -19,4 +19,5 @@ Route::post('/login', 'Auth\AuthenticationController@login');
 
 
 Route::get('pages', 'ApiController@getPages');
+Route::get('pages/{id}', 'ApiController@getPage');
 Route::get('menu-items', 'ApiController@menuItems');

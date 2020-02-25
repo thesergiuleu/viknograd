@@ -32,6 +32,7 @@ use Illuminate\Support\Carbon;
  * @mixin Eloquent
  * @property string|null $url
  * @method static \Illuminate\Database\Eloquent\Builder|\App\InlineBlock whereUrl($value)
+ * @property-read mixed $attachment_url
  */
 class InlineBlock extends Model
 {
@@ -47,5 +48,10 @@ class InlineBlock extends Model
     public function attachments()
     {
         return $this->morphMany(Attachment::class, 'entity');
+    }
+
+    public function getAttachmentUrlAttribute()
+    {
+        return $this->attachments->isNotEmpty() ?  config('app.url') . '/storage/' . $this->attachments[0]->file : "";
     }
 }

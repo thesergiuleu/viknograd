@@ -21,4 +21,13 @@ class ApiController extends Controller
         }
         return response()->json($menuItems);
     }
+
+    public function getPage($id)
+    {
+        $page = Page::with(['attachments', 'inline_blocks', 'inline_blocks.attachments', 'videos'])->findOrFail($id);
+        foreach ($page->inline_blocks as $inline_block) {
+            $inline_block->file_url = $inline_block->attachment_url;
+        }
+        return response()->json($page);
+    }
 }

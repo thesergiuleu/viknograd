@@ -1,20 +1,18 @@
 @extends('layouts.admin')
 
-@section('title', trans("actions.pages-title.$entity.edit"))
+@section('title', trans('actions.pages-title.project.add'))
 
 @section('content')
     <main class="main-container">
-        <form method="post" action="{{route("$entity.update", $item->id)}}" enctype="multipart/form-data">
+        <form method="post" action="{{route("$entity.store")}}" enctype="multipart/form-data">
             {{ csrf_field() }}
             <input type="hidden" name="page_block" value="{{$page_block}}">
-            <input type="hidden" name="_method" value="PUT"/>
-
             <div class="row" id="inline-block-div">
                 <div class="col-md-12">
                     <div class="my-card">
                         <div class="form-group required ">
                             <label for="exampleInputName">{{trans("forms.$entity.name")}}</label>
-                            <input type="text" name="name" class="form-control" value="{{$item->name}}" required>
+                            <input type="text" name="name" class="form-control" required>
                         </div>
                         <div class="form-group required">
                             <label>{{trans("forms.$entity.body")}}</label>
@@ -22,17 +20,18 @@
                                     'editorName' => "body",
                                     'editorId' => 'body'
                                     ])
-                                {{$item->body}}
+                                {{old('body')}}
                             @endcomponent
                         </div>
                         <div class="form-group">
                             <label>{{trans("forms.$entity.url")}}</label>
-                            <input class="form-control" type="text" name="url" value="{{$item->url}}">
+                            <input class="form-control" type="text" name="url">
                         </div>
                         <div class="form-group required">
                             @component('admin.form_elements.simple_file_input', [
-                                 'fileInstances' =>  $item->attachments->isNotEmpty() ? $item->attachments : false,
+                                 'fileInstances' =>  false,
                                  'inputName' => "attachments",
+                                 'has_input' => false
                                  ])
                             @endcomponent
                         </div>

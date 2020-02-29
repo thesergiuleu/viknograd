@@ -20,27 +20,18 @@
                 @endif
             </div>
             <div class="row">
-                <div class="col-md-11">
+                <div class="col-md-12">
                     <div class="form-group required">
-                        <label for="exampleInputName">{{trans("forms.$entity.url")}}</label>
-                        <input type="text" name="url" class="form-control" value="{{$item->url}}">
-                        @if ($errors->has('url'))
+                        <label for="exampleInputName">{{trans("forms.$entity.page_header")}}</label>
+                        <input type="text" name="page_header" class="form-control" value="{{$item->page_header}}">
+                        @if ($errors->has('page_header'))
                             <div class="has-error">
                          <span class="help-block">
-                            <strong>{{ $errors->first('url') }}</strong>
+                            <strong>{{ $errors->first('page_header') }}</strong>
                         </span>
                             </div>
 
                         @endif
-                    </div>
-                </div>
-                <div class="col-md-1">
-                    <label for="eventStatus">{{trans("forms.$entity.is_active")}}</label>
-                    <div class="checkbox">
-                        <label>
-                            <input type="hidden" name="is_active" value="0">
-                            <input type="checkbox" name="is_active" value="1" {{$item->is_active == 1 ? 'checked' : ''}}> {{trans("forms.$entity.is_active")}}
-                        </label>
                     </div>
                 </div>
             </div>
@@ -67,6 +58,7 @@
                     @component('admin.form_elements.simple_file_input', [
                      'fileInstances' =>  $item->attachments->isNotEmpty() ? $item->attachments : false,
                      'inputName' => 'attachments[]',
+                     'has_input' => true,
                      ])
 
                     @endcomponent
@@ -131,6 +123,7 @@
                                 @component('admin.form_elements.simple_file_input', [
                                      'fileInstances' =>  $inlineBlock->attachments->isNotEmpty() ? $inlineBlock->attachments : false,
                                      'inputName' => "inline_blocks[$key][attachments]",
+                                     'has_input' => false,
                                      ])
                                 @endcomponent
                             </div>

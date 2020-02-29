@@ -36,7 +36,7 @@ use Illuminate\Support\Carbon;
  */
 class InlineBlock extends Model
 {
-    protected $fillable = ['page_id', 'name', 'url', 'body'];
+    protected $fillable = ['page_id', 'name', 'header','url', 'body'];
 
     public function page()
     {

@@ -1,10 +1,18 @@
 @if ($fileInstances)
     <div class="row">
+        @if($has_input)
+            <div class="col-md-12 form-group">
+                <div class="pull-left">
+                    <input type="file" multiple name="{{$inputName}}" class="form-control-file" />
+                </div>
+            </div>
+        @endif
     @foreach($fileInstances as $fileInstance)
         <div class="col-md-4">
+            <br>
             <div class="form-group">
                 <div class="pull-left">
-                    <button type="submit" class="btn btn-danger">{{trans('actions.remove')}}</button>
+                    <button data-file_instance="{{json_encode($fileInstance)}}" data-input_name="{{$inputName}}" data-delete_url="{{route('attachment.delete', $fileInstance->id)}}" type="button" onclick="removeFile(this)" class="btn btn-danger">{{trans('actions.remove')}}</button>
                 </div>
             </div>
             <br>

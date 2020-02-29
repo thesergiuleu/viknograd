@@ -6,7 +6,7 @@ return [
     'pages' => [
         ['title' => 'Dashboard', 'ext' => 'home', 'id' => null],
         ['title' => 'Pages', 'ext' => 'page', 'id' => null],
-        ['title' => 'Projects', 'ext' => 'inline_block', 'id' => Page::PROJECTS],
+        ['title' => 'Projects', 'ext' => 'project', 'id' => Page::PROJECTS],
 //        ['title' => 'Requested Media', 'ext' => 'requested_media'],
 //        ['title' => 'Reviews', 'ext' => 'review'],
 //        ['title' => 'Naratives', 'ext' => 'narative'],

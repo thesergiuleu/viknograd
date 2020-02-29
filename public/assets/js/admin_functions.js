@@ -106,3 +106,18 @@ function removeReviewSection(element) {
         col.remove();
     }
 }
+
+function removeFile(element) {
+console.log(element.dataset.delete_url)
+    const request = $.ajax({
+        type: "DELETE",
+        url: element.dataset.delete_url,
+        dataType: 'json'
+    });
+    request.done(function () {
+        window.location.reload();
+    });
+    request.fail(function (jqXHR, resp) {
+        alert("Request failed: " + resp.message);
+    });
+}

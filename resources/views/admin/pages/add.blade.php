@@ -19,29 +19,28 @@
                 @endif
             </div>
             <div class="row">
-                <div class="col-md-11">
+                <div class="col-md-12">
                     <div class="form-group required">
-                        <label for="exampleInputName">{{trans("forms.$entity.url")}}</label>
-                        <input type="text" name="url" class="form-control" required>
-                        @if ($errors->has('url'))
+                        <label for="exampleInputName">{{trans("forms.$entity.page_header")}}</label>
+                        <input type="text" name="page_header" class="form-control" required>
+                        @if ($errors->has('page_header'))
                             <div class="has-error">
                          <span class="help-block">
-                            <strong>{{ $errors->first('url') }}</strong>
+                            <strong>{{ $errors->first('page_header') }}</strong>
                         </span>
                             </div>
-
                         @endif
                     </div>
                 </div>
-                <div class="col-md-1">
-                    <label for="eventStatus">{{trans("forms.$entity.is_active")}}</label>
-                    <div class="checkbox">
-                        <label>
-                            <input type="hidden" name="is_active" value="0">
-                            <input type="checkbox" name="is_active" value="1" {{old('is_active') == 1 ? 'checked' : ''}}> {{trans("forms.$entity.is_active")}}
-                        </label>
-                    </div>
-                </div>
+{{--                <div class="col-md-1">--}}
+{{--                    <label for="eventStatus">{{trans("forms.$entity.is_active")}}</label>--}}
+{{--                    <div class="checkbox">--}}
+{{--                        <label>--}}
+{{--                            <input type="hidden" name="is_active" value="0">--}}
+{{--                            <input type="checkbox" name="is_active" value="1" {{old('is_active') == 1 ? 'checked' : ''}}> {{trans("forms.$entity.is_active")}}--}}
+{{--                        </label>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
             </div>
             <div class="form-group required">
                 <label for="exampleInputDescription">{{trans("forms.$entity.body")}}</label>
@@ -65,7 +64,8 @@
                 <div id="file-container">
                     @component('admin.form_elements.simple_file_input', [
                      'fileInstances' =>  false,
-                     'inputName' => 'attachments',
+                     'inputName' => 'attachments[]',
+                     'has_input' => true,
                      ])
 
                     @endcomponent

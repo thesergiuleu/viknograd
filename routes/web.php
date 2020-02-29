@@ -24,6 +24,10 @@ Route::group(['middleware' => ['admin'], 'prefix' => 'admin'], function () {
         Route::get('/', 'Admin\DashboardController@index')->name('home');
         Route::get('/dashboard', 'Admin\DashboardController@index')->name('home');
 
+        //attachments routes
+        Route::post('/attachment/insert', 'Admin\AttachmentsController@upload_from_editor')->name('attachment.insert');
+        Route::delete('/attachment/delete/{id}', 'Admin\AttachmentsController@destroy')->name('attachment.delete')->where('id', '[0-9]+');
+
         //pages
         Route::get('/page/add/{page_block?}', 'Admin\PageController@add')->name('page.add');
         Route::get('/page/edit/{id}/{page_block?}', 'Admin\PageController@edit')->name('page.edit')->where('id', '[0-9]+');
@@ -34,13 +38,13 @@ Route::group(['middleware' => ['admin'], 'prefix' => 'admin'], function () {
         Route::get('/page/{page_block?}', 'Admin\PageController@index')->name('page');
 
 
-        //pages
-        Route::get('/inline_block/add/{page_block?}', "Admin\InlineBlockController@add")->name('inline_block.add');
-        Route::get('/inline_block/edit/{id}/{page_block?}', 'Admin\InlineBlockController@edit')->name('inline_block.edit')->where('id', '[0-9]+');
-        Route::get('/inline_block/show/{id}', 'Admin\InlineBlockController@show')->name('inline_block.show')->where('id', '[0-9]+');
-        Route::post('/inline_block', 'Admin\InlineBlockController@store')->name('inline_block.store');
-        Route::put('/inline_block/update/{id}', 'Admin\InlineBlockController@update')->name('inline_block.update')->where('id', '[0-9]+');
-        Route::delete('/inline_block/delete/{id}', 'Admin\InlineBlockController@destroy')->name('inline_block.delete')->where('id', '[0-9]+');
-        Route::get('/inline_block/{page_block?}', 'Admin\InlineBlockController@index')->name('inline_block');
+        //projects
+        Route::get('/project/add/{page_block?}', "Admin\ProjectsController@add")->name('project.add');
+        Route::get('/project/edit/{id}/{page_block?}', 'Admin\ProjectsController@edit')->name('project.edit')->where('id', '[0-9]+');
+        Route::get('/project/show/{id}', 'Admin\ProjectsController@show')->name('project.show')->where('id', '[0-9]+');
+        Route::post('/project', 'Admin\ProjectsController@store')->name('project.store');
+        Route::put('/project/update/{id}', 'Admin\ProjectsController@update')->name('project.update')->where('id', '[0-9]+');
+        Route::delete('/project/delete/{id}', 'Admin\ProjectsController@destroy')->name('project.delete')->where('id', '[0-9]+');
+        Route::get('/project/{page_block?}', 'Admin\ProjectsController@index')->name('project');
     });
 });

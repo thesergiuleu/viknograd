@@ -6,7 +6,7 @@
     @component('admin.common.grid', [
     'items' => $items,
     'gridData'=> $gridData,
-    'route' => 'inline_block'
+    'route' => 'project'
     ])
 
     @endcomponent

@@ -10,21 +10,21 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
-class InlineBlockController extends AdminBaseController
+class ProjectsController extends AdminBaseController
 {
-    protected $entity = 'inline_block';
+    protected $entity = 'project';
 
     protected $sortColumns = ['id'];
     /**
      * @var InlineBlock
      */
-    protected $page;
+    protected $project;
 
     protected $page_block = null;
 
     protected $gridData = [
         "columns" => ['id', 'name', 'url'],
-        'entity' => 'inline_block',
+        'entity' => 'project',
         'actionsDisplay' => [
             'edit' => 1,
             'info' => 1
@@ -111,5 +111,10 @@ class InlineBlockController extends AdminBaseController
             $this->uploader->setDirectory('inline_blocks_' . $item->id);
             $this->uploader->storeFile($this->request->file('attachments'), $entity);
         }
+    }
+
+    protected function afterUpdateHook($item)
+    {
+        $this->afterCreateHook($item);
     }
 }

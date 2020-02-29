@@ -85,7 +85,7 @@ class UploaderClass
             if ($fileModel) {
                 $deleted = Storage::disk('public')->delete($fileModel->file);
                 if ($deleted) {
-                    return $this->repository->delete($fileID);
+                    return $this->repository->destroy($fileID);
                 }
                 return $deleted;
             }

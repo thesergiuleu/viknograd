@@ -10,7 +10,10 @@ class ApiController extends Controller
 {
     public function getPages()
     {
-        return response()->json(Page::with(['attachments', 'inline_blocks', 'inline_blocks.attachments', 'videos'])->get());
+        $pages = Page::with(['attachments', 'inline_blocks', 'inline_blocks.attachments', 'videos'])->get();
+        $json_data = ($pages);
+        file_put_contents('pages.json', $json_data);
+        return response()->json($pages);
     }
 
     public function menuItems()

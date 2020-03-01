@@ -108,7 +108,6 @@ function removeReviewSection(element) {
 }
 
 function removeFile(element) {
-console.log(element.dataset.delete_url)
     const request = $.ajax({
         type: "DELETE",
         url: element.dataset.delete_url,
@@ -120,4 +119,8 @@ console.log(element.dataset.delete_url)
     request.fail(function (jqXHR, resp) {
         alert("Request failed: " + resp.message);
     });
+}
+
+function changeParent(element) {
+    console.log(element)
 }

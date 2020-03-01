@@ -25,7 +25,7 @@
 
 <tbody>
 @foreach($items as $item)
-<tr>
+<tr @if($item->parent_id) style="padding-left: 20px" @endif>
     @foreach($gridData['columns'] as $column)
         <td>
             {!! mapGridColumn($item, $column) !!}

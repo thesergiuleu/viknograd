@@ -46,5 +46,7 @@ Route::group(['middleware' => ['admin'], 'prefix' => 'admin'], function () {
         Route::put('/project/update/{id}', 'Admin\ProjectsController@update')->name('project.update')->where('id', '[0-9]+');
         Route::delete('/project/delete/{id}', 'Admin\ProjectsController@destroy')->name('project.delete')->where('id', '[0-9]+');
         Route::get('/project/{page_block?}', 'Admin\ProjectsController@index')->name('project');
+
+        Route::get('/menu_item/{page_block?}', 'Admin\ApiMenuItemsController@index')->name('menu_item');
     });
 });

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\ApiMenuItem;
 use App\InlineBlock;
 use App\Libraries\Uploader\UploaderClass;
 use App\Page;
@@ -86,6 +87,7 @@ class ProjectsController extends AdminBaseController
                 'name' => "Проекты",
                 'page_block' => Page::PROJECTS
             ]);
+            ApiMenuItem::create(['page_id' => $page->id]);
         }
         $this->setPageId($page->id);
     }

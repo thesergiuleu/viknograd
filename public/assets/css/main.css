@@ -100,3 +100,12 @@
     border-radius: 5px;
     padding: 15px 25px;
 }
+.page-div {
+    display: none;
+    position: absolute;
+    z-index: 100;
+    background: #f5f8fa !important;
+    width: 161px;
+    height: 234px;
+    overflow-y: auto;
+}

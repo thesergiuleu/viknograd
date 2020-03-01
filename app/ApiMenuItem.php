@@ -26,7 +26,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class ApiMenuItem extends Model
 {
-    protected $fillable = ['parent_id', 'page_id'];
+    protected $fillable = ['parent_id', 'page_id', 'position'];
 
     public function parent()
     {
@@ -36,5 +36,15 @@ class ApiMenuItem extends Model
     public function page()
     {
         return $this->belongsTo(Page::class);
+    }
+
+    public function children()
+    {
+        return $this->hasMany(self::class, 'parent_id', 'id')->orderBy('position');
+    }
+
+    public function getPageNameAttribute()
+    {
+        return $this->page ? $this->page->name : "";
     }
 }

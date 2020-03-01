@@ -22,7 +22,7 @@
                 <div class="col-md-12">
                     <div class="form-group required">
                         <label for="exampleInputName">{{trans("forms.$entity.page_header")}}</label>
-                        <input type="text" name="page_header" class="form-control" required>
+                        <input type="text" name="page_header" class="form-control">
                         @if ($errors->has('page_header'))
                             <div class="has-error">
                          <span class="help-block">

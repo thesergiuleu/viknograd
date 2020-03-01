@@ -18,11 +18,9 @@ class ApiController extends Controller
 
     public function menuItems()
     {
-        $menuItems = ApiMenuItem::with('page')->get();
-        foreach ($menuItems as $menuItem) {
-            $menuItem->name = $menuItem->page->name;
-        }
-        return response()->json($menuItems);
+        $menuItems = ApiMenuItem::with(['page', 'children'])->whereNull('parent_id')->get();
+        $data = $this->_menuItems($menuItems);
+        return response()->json($data);
     }
 
     public function getPage($id)
@@ -32,5 +30,21 @@ class ApiController extends Controller
             $inline_block->file_url = $inline_block->attachment_url;
         }
         return response()->json($page);
+    }
+
+    private function _menuItems($collection)
+    {
+        $data = [];
+        foreach ($collection as $item) {
+            $children = [];
+            if ($item->children->isNotEmpty()) {
+                $children = $this->_menuItems($item->children);
+            }
+            $data[$item->id]['page_id']     = $item->page_id;
+            $data[$item->id]['name']        = $item->page->name;
+            $data[$item->id]['path']        = $item->page->url;
+            $data[$item->id]['content']     = $children;
+        }
+        return $data;
     }
 }

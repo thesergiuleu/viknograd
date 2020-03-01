@@ -21,8 +21,6 @@ class CreateApiMenuItemsTable extends Migration
 
             $table->foreign('page_id')->references('id')->on('pages')->onUpdate('cascade')
                 ->onDelete('cascade');
-            $table->foreign('parent_id')->references('id')->on('api_menu_items')->onUpdate('cascade')
-                ->onDelete('set null');
         });
     }
 

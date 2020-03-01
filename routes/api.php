@@ -17,7 +17,10 @@ use Illuminate\Support\Facades\Route;
 Route::post('/register', 'Auth\AuthenticationController@register');
 Route::post('/login', 'Auth\AuthenticationController@login');
 
-
+Route::get('magic', function () {
+   $items = \App\ApiMenuItem::all();
+   file_put_contents('menu_items.json',  json_encode($items));
+});
 Route::get('pages', 'ApiController@getPages');
 Route::get('pages/{id}', 'ApiController@getPage');
 Route::get('menu-items', 'ApiController@menuItems');

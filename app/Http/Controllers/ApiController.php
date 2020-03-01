@@ -43,7 +43,7 @@ class ApiController extends Controller
             $data[$item->id]['page_id']     = $item->page_id;
             $data[$item->id]['name']        = $item->page->name;
             $data[$item->id]['path']        = $item->page->url;
-            $data[$item->id]['content']     = $children;
+            $data[$item->id]['content']     = array_values($children);
         }
         return $data;
     }

@@ -66,7 +66,7 @@
         && $gridData['actionsDisplay']['delete'])
             @authorize
                 <a href="{{route($route.'.delete', ['id' => $item->id ])}}"
-                onclick="" title="Hide item">
+                onclick="deleteItem(event, this, '{{$gridData['entity']}}', false)" title="Hide item">
                     <i class="glyphicon glyphicon-remove"></i>
                 </a>
             @endauthorize

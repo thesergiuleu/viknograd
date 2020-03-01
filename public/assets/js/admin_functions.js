@@ -124,3 +124,24 @@ function removeFile(element) {
 function changeParent(element) {
     console.log(element)
 }
+
+function deleteItem(event, el, entity, skipReload, isRestore) {
+    event.preventDefault();
+    const messagePrefix = isRestore ? 'restore back' : 'remove';
+    const confirmAlert = confirm('Do you really want to ' + messagePrefix + ' this ' + entity);
+    if (confirmAlert) {
+        console.log($(el).attr('href'));
+        $.ajax({
+            type: "DELETE",
+            url: $(el).attr('href'),
+            dataType: 'json',
+            success: function (resp) {
+                alert(resp.message);
+                location.reload();
+            },
+            error: function (error) {
+                console.warn(error);
+            }
+        });
+    }
+}

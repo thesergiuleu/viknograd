@@ -20,7 +20,7 @@ class ApiController extends Controller
     {
         $menuItems = ApiMenuItem::with(['page', 'children'])->whereNull('parent_id')->get();
         $data = $this->_menuItems($menuItems);
-        return response()->json($data);
+        return response()->json(array_values($data));
     }
 
     public function getPage($id)

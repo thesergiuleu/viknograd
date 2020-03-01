@@ -2,19 +2,26 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\ApiMenuItem;
 use App\Attachment;
 use App\InlineBlock;
 use App\Libraries\Uploader\UploaderClass;
 use App\Page;
 use App\Video;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\View\View;
 
 class PageController extends AdminBaseController
 {
     protected $entity = 'page';
 
     protected $sortColumns = ['id'];
+    protected $limit = 50;
+    protected $sortOrder = 'asc';
+
     /**
      * @var Page
      */
@@ -51,7 +58,29 @@ class PageController extends AdminBaseController
         $this->addNewItemRoute = $this->entity . '.add';
         $this->uploader = $uploader;
     }
+    /**
+     * Display a listing of the resource.
+     *
+     * @param $page_block
+     * @return Factory|JsonResponse|View
+     */
+    public function index($page_block = null)
+    {
+        $this->setPageId($page_block);
+        $this->beforeInitPaginateHook();
+        $this->viewData['items']    = ApiMenuItem::query()->whereNull('parent_id')->orderBy($this->sortColumn, $this->sortOrder)->paginate($this->limit);
+        $this->afterInitPaginateHook();
+        $this->viewData['gridData'] = $this->gridData;
 
+        if (request()->wantsJson()) {
+            return response()->json([
+                'data' => $this->viewData['items'],
+            ]);
+        }
+        $this->viewData['addNewRoute'] = $this->addNewItemRoute;
+        $this->setQueryString();
+        return view($this->entityViews['list'], $this->viewData);
+    }
     /**
      *
      * Doing some actions after creating new item

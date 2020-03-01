@@ -262,7 +262,6 @@ class AdminBaseController extends Controller
     {
         $deleted = $this->model->findOrFail($id)->delete();
 
-        dd($deleted);
         if (request()->wantsJson()) {
             return response()->json([
                 'message' => $this->messages['deleted'],

@@ -138,6 +138,7 @@ function deleteItem(event, el, entity, skipReload, isRestore) {
     }
 }
 $( function() {
+    $('.ui-helper-hidden-accessible').remove();
     let from = '';
     let to = '';
     let from_position = '';

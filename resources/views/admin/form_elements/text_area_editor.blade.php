@@ -1,8 +1,8 @@
-{{--@push('scripts')--}}
+@push('scripts')
 {{--    <link rel="stylesheet"  type="text/css" href="{{ asset('assets/js/summernote/summernote.css') }}"></link>--}}
 {{--    <link rel="stylesheet"  type="text/css" href="{{ asset('assets/css/file_manager.css') }}"></link>--}}
 {{--    <script src="{{ asset('assets/js/summernote/summernote.js') }}"></script>--}}
-{{--@endpush--}}
+@endpush
 <textarea name="{{$editorName}}" id="{{$editorId}}" class="form-control" >
     {{$slot}}
 </textarea>

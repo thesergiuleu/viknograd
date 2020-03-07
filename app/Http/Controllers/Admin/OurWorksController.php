@@ -9,11 +9,12 @@ use App\Page;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\View\View;
 
-class ProjectsController extends AdminBaseController
+class OurWorksController extends AdminBaseController
 {
-    protected $entity = 'project';
+    protected $entity = 'our_work';
 
     protected $sortColumns = ['id'];
     /**
@@ -25,9 +26,10 @@ class ProjectsController extends AdminBaseController
 
     protected $gridData = [
         "columns" => ['id', 'name', 'url'],
-        'entity' => 'project',
+        'entity' => 'our_work',
         'actionsDisplay' => [
             'edit' => 1,
+            'info' => 1
         ]
     ];
 
@@ -37,12 +39,6 @@ class ProjectsController extends AdminBaseController
      */
     private $uploader;
 
-    /**
-     * MediaController constructor.
-     * @param Request $request
-     * @param InlineBlock $model
-     * @param UploaderClass $uploader
-     */
     public function __construct(Request $request, InlineBlock $model, UploaderClass $uploader)
     {
         $this->request = $request;
@@ -82,11 +78,11 @@ class ProjectsController extends AdminBaseController
 
     public function beforeInitPaginateHook()
     {
-        $page = Page::wherePageBlock(Page::PROJECTS)->first();
+        $page = Page::wherePageBlock(Page::OUR_WORKS)->first();
         if (!$page) {
             $page = Page::create([
-                'name' => "Проекты",
-                'page_block' => Page::PROJECTS
+                'name' => "НАШИ РАБОТЫ",
+                'page_block' => Page::OUR_WORKS
             ]);
             ApiMenuItem::create(['page_id' => $page->id]);
         }

@@ -89,7 +89,7 @@ class AdminBaseController extends Controller
         $url = request()->url();
         preg_match("/\/(\d+)$/",$url,$matches);
         if (!empty($matches)) {
-            $this->setPageId($matches[1]);
+            $this->setPageBlock($matches[1]);
         }
         $this->viewData['entity']           = $this->entity;
         $this->viewData['page_block']          = $this->page_block;
@@ -106,7 +106,7 @@ class AdminBaseController extends Controller
 
     }
 
-    public function setPageId($page_block)
+    public function setPageBlock($page_block)
     {
         $this->page_block = $page_block;
     }
@@ -118,7 +118,7 @@ class AdminBaseController extends Controller
      */
     public function index($page_block = null)
     {
-        $this->setPageId($page_block);
+        $this->setPageBlock($page_block);
         $this->beforeInitPaginateHook();
         $this->viewData['items']    = $this->model->orderBy($this->sortColumn, $this->sortOrder)->paginate($this->limit);
         $this->afterInitPaginateHook();
@@ -143,7 +143,7 @@ class AdminBaseController extends Controller
      */
     public function add($page_block = null)
     {
-        $this->setPageId($page_block);
+        $this->setPageBlock($page_block);
         $this->beforeSetAddFormHook();
 
         return view($this->entityViews['add'], $this->viewData);
@@ -191,7 +191,7 @@ class AdminBaseController extends Controller
      */
     public function edit($id, $page_block = null)
     {
-        $this->setPageId($page_block);
+        $this->setPageBlock($page_block);
         $this->viewData['item'] = $this->model->findOrFail($id);
         $this->beforeSetEditFormHook($id);
         return view($this->entityViews['edit'], $this->viewData);

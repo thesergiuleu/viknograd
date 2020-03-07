@@ -1,9 +1,27 @@
 <?php
 return [
-    'page' => [
+    'project' => [
         'id'                 => 'ID',
-        'url'                => 'Page URL',
-        'name'               => 'Title',
+        'url'                => 'Cсылка',
+        'name'               => 'Название',
     ],
-    'actions' => 'Actions'
+    'new' => [
+        'id'                 => 'ID',
+        'name'               => 'Название',
+    ],
+    'contact' => [
+        'id'                 => 'ID',
+        'name'               => 'Город',
+        'header'             => 'Имя',
+    ],
+    'our_work' => [
+        'id'                 => 'ID',
+        'name'               => 'Город',
+        'url'                => 'Имя',
+    ],
+    'job' => [
+        'id'                 => 'ID',
+        'name'               => 'Название',
+    ],
+    'actions' => 'Действия'
 ];

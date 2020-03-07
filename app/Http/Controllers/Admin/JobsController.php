@@ -9,11 +9,12 @@ use App\Page;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\View\View;
 
-class ProjectsController extends AdminBaseController
+class JobsController extends AdminBaseController
 {
-    protected $entity = 'project';
+    protected $entity = 'job';
 
     protected $sortColumns = ['id'];
     /**
@@ -24,8 +25,8 @@ class ProjectsController extends AdminBaseController
     protected $page_block = null;
 
     protected $gridData = [
-        "columns" => ['id', 'name', 'url'],
-        'entity' => 'project',
+        "columns" => ['id', 'name'],
+        'entity' => 'job',
         'actionsDisplay' => [
             'edit' => 1,
         ]
@@ -37,12 +38,6 @@ class ProjectsController extends AdminBaseController
      */
     private $uploader;
 
-    /**
-     * MediaController constructor.
-     * @param Request $request
-     * @param InlineBlock $model
-     * @param UploaderClass $uploader
-     */
     public function __construct(Request $request, InlineBlock $model, UploaderClass $uploader)
     {
         $this->request = $request;
@@ -53,7 +48,6 @@ class ProjectsController extends AdminBaseController
         $this->addNewItemRoute = $this->entity . '.add';
         $this->uploader = $uploader;
     }
-
     /**
      * Display a listing of the resource.
      *
@@ -82,11 +76,12 @@ class ProjectsController extends AdminBaseController
 
     public function beforeInitPaginateHook()
     {
-        $page = Page::wherePageBlock(Page::PROJECTS)->first();
+        $page = Page::wherePageBlock(Page::JOBS)->first();
         if (!$page) {
             $page = Page::create([
-                'name' => "Проекты",
-                'page_block' => Page::PROJECTS
+                'name' => "ВАКАНСИИ",
+                'page_header' => "ВАКАНСИИ",
+                'page_block' => Page::JOBS
             ]);
             ApiMenuItem::create(['page_id' => $page->id]);
         }

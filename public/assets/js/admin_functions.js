@@ -8,19 +8,15 @@ const elements = function (counter, name) {
             `<input type="hidden" name="${name}[${counter}][id]">`+
             '<div class="form-group required ">'+
             `<span style="color: #3097d1; cursor: pointer" data-data="${name}" data-id="${counter}" onclick="removeReviewSection(this)" class="pull-right"><i class="glyphicon glyphicon-remove"></i></span>`+
-            '<label for="exampleInputName">Title</label>'+
+            '<label for="exampleInputName">Ключевое слово</label>'+
             `<input type="text" name="${name}[${counter}][name]" class="form-control" required>`+
             '</div>'+
             '<div class="form-group required">'+
-            '<label>Body</label>'+
+            '<label>Контент</label>'+
             `<textarea id="${name}_${counter}" type="text" name="${name}[${counter}][body]" class="form-control"></textarea>`+
             '</div>'+
-            '<div class="form-group">'+
-            '<label>Link</label>'+
-            `<input class="form-control" type="text" name="${name}[${counter}][url]">`+
-            '</div>'+
             '<div class="form-group required">'+
-            '<label>Attachment</label>'+
+            '<label>Фотография</label>'+
             `<input type="file" name="${name}[${counter}][attachments]" class="form-control-file" />`+
             '</div>'+
             '</div>'+
@@ -31,16 +27,16 @@ const elementsVideo = function (counter, name) {
         `<input type="hidden" name="${name}[${counter}][id]">`+
         '<div class="form-group required ">'+
         `<span style="color: #3097d1; cursor: pointer" data-data="${name}" data-id="${counter}" onclick="removeReviewSection(this)" class="pull-right"><i class="glyphicon glyphicon-remove"></i></span>`+
-        '<label for="exampleInputName">URL</label>'+
+        '<label for="exampleInputName">Cсылка</label>'+
         `<input type="text" name="${name}[${counter}][url]" class="form-control" required>`+
         '</div>'+
         '<div class="form-check form-check-inline">'+
         `<input id="video-top" type="radio" value="top" name="${name}[${counter}][position]" class="form-check-input" />`+
-        '<label for="video-top" class="form-check-label"> Position Top</label>'+
+        '<label for="video-top" class="form-check-label"> Положение «С верху»</label>'+
         '</div>'+
         '<div class="form-check form-check-inline">'+
         `<input id="video-bottom" type="radio" value="bottom" name="${name}[${counter}][position]" class="form-check-input" />`+
-        '<label for="video-bottom" class="form-check-label"> Position Bottom</label>'+
+        '<label for="video-bottom" class="form-check-label"> Положение «С Низу»</label>'+
         '</div>'+
         '</div>'+
         '<br>';
@@ -121,10 +117,6 @@ function removeFile(element) {
     });
 }
 
-function changeParent(element) {
-    console.log(element)
-}
-
 function deleteItem(event, el, entity, skipReload, isRestore) {
     event.preventDefault();
     const messagePrefix = isRestore ? 'restore back' : 'remove';
@@ -145,3 +137,32 @@ function deleteItem(event, el, entity, skipReload, isRestore) {
         });
     }
 }
+$( function() {
+    let from = '';
+    let to = '';
+    let from_position = '';
+    let to_position = '';
+    $( ".connectedSortable" ).sortable({
+        start: function (event, ui) {
+            from_position = ui.item.index();
+            from = event.target.id;
+        },
+        update: function (event, ui) {
+            to_position = ui.item.index();
+            to = event.target.id;
+        },
+        stop: function (event, ui) {
+            $.ajax({
+                url: `${event.target.dataset.url}`,
+                type: 'post',
+                data: {from: from, to: to, from_position: from_position, to_position: to_position, id: ui.item[0].id},
+                async: true,
+                success: function (response) {
+
+                }
+            });
+        },
+        connectWith: ".connectedSortable"
+    }).disableSelection();
+});
+

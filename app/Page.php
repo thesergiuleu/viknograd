@@ -43,16 +43,47 @@ use Illuminate\Support\Carbon;
  */
 class Page extends Model
 {
-    protected $fillable = ['name', 'page_header','url', 'body', 'page_block'];
+    protected $fillable = ['name', 'page_header','url', 'body', 'page_block', 'parent_id'];
 
-    const PROJECTS = 1;
+    const PROJECTS      = 1;
+    const CONTACTS      = 2;
+    const OUR_WORKS     = 3;
+    const JOBS          = 4;
+    const NEWS          = 5;
+
+
+    const PAGE_BLOCKS = [
+        self::PROJECTS,
+        self::CONTACTS,
+        self::OUR_WORKS,
+        self::JOBS,
+        self::NEWS,
+    ];
 
     /**
      * Get upload relation.
      */
     public function attachments()
     {
-        return $this->morphMany(Attachment::class, 'entity');
+        return $this->morphMany(Attachment::class, 'entity')->where('file', 'not like', 'thumbnails/%');
+    }
+
+    public function thumbnails()
+    {
+        return $this->morphMany(Attachment::class, 'entity')->where('file', 'like', 'thumbnails/%');
+    }
+
+    public function children()
+    {
+        return $this->hasMany(self::class, 'parent_id', 'id');
+    }
+
+    public function childrenFormed()
+    {
+        foreach ($this->children as $item) {
+            $item['thumbnail_url'] = $item->thumbnails->isNotEmpty() ? $item->thumbnails[0] ? $item->thumbnails[0]->file : null : null;
+        }
+        return $this->children;
     }
 
     /**
@@ -77,5 +108,30 @@ class Page extends Model
     public function apiMenuItem()
     {
         return $this->belongsTo(ApiMenuItem::class, 'page_id', 'id');
+    }
+
+    public function url()
+    {
+        switch ($this->page_block) {
+            case self::PROJECTS:
+                $entity = 'project';
+                break;
+            case self::CONTACTS:
+                $entity = 'contact';
+                break;
+            case self::OUR_WORKS:
+                $entity = 'our_work';
+                break;
+            case self::JOBS:
+                $entity = 'job';
+                break;
+            case self::NEWS:
+                $entity = 'new';
+                break;
+            default:
+                $entity = 'page';
+                break;
+        }
+        return env('APP_URL') . "/admin/$entity/" . $this->page_block;
     }
 }

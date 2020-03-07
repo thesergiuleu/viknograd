@@ -1,24 +1,24 @@
 <?php
 return [
-    'add' => 'Add',
+    'add' => 'Добавить',
 
-    'save' => 'Save',
+    'save' => 'Сохранить',
 
-    'cancel' => 'Cancel',
-    'details' => 'Details',
-    'submit' => 'Submit',
+    'cancel' => 'Отмена',
+    'details' => 'Детали',
+    'submit' => 'Разместить',
 
-    'search' => 'Search',
-    'modify' => 'Modify',
-    'reset' => 'Reset',
-    'remove' => 'Remove',
-    'back' => 'Back',
+    'search' => 'Поиск',
+    'modify' => 'Изменить',
+    'reset' => 'Сброс',
+    'remove' => 'Убрать',
+    'back' => 'Назад',
 
-    'replace' => 'Replace',
+    'replace' => 'Заменять',
 
-    'logout' => 'Logout',
-    'restore' => 'Restore',
-    'register' => 'Register',
+    'logout' => 'Выйти',
+    'restore' => 'Восстановить',
+    'register' => 'Регистрировать',
     'pages-title' => [
         'page' => [
             'add' => 'Add page',

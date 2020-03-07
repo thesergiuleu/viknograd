@@ -50,7 +50,7 @@ class ApiMenuItemsController extends AdminBaseController
     }
     public function index($page_block = null)
     {
-        $this->setPageId($page_block);
+        $this->setPageBlock($page_block);
         $this->beforeInitPaginateHook();
         $this->viewData['items']    = $this->model->whereNull('parent_id')->orderBy($this->sortColumn, $this->sortOrder)->paginate($this->limit);
         $this->afterInitPaginateHook();
@@ -67,4 +67,20 @@ class ApiMenuItemsController extends AdminBaseController
         return view($this->entityViews['list'], $this->viewData);
     }
 
+    public function changeMenuPosition()
+    {
+        $menuItem = $this->model->where('id', $this->request->get('id'))->first();
+
+        if ($menuItem && $menuItem->children->isEmpty()) {
+//            $menuItems = $this->model->whereParentId($menuItem->parent_id)->get();
+            if ($this->request->get('from') != $this->request->get('to')) {
+                $menuItem->parent_id = $this->request->get('to');
+            }
+            $menuItem->position  = $this->request->get('to_position');
+            $menuItem->save();
+            return $menuItem;
+        }
+
+        return [];
+    }
 }

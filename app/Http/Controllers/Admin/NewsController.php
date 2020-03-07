@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\ApiMenuItem;
-use App\Attachment;
 use App\InlineBlock;
 use App\Libraries\Uploader\UploaderClass;
 use App\Page;
@@ -14,25 +13,23 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\View\View;
 
-class PageController extends AdminBaseController
+class NewsController extends AdminBaseController
 {
-    protected $entity = 'page';
+    protected $entity = 'new';
 
     protected $sortColumns = ['id'];
-    protected $limit = 50;
-    protected $sortOrder = 'asc';
-
     /**
-     * @var Page
+     * @var InlineBlock
      */
-    protected $page;
+    protected $project;
+
+    protected $page_block = null;
 
     protected $gridData = [
-        "columns" => ['id', 'name', 'url'],
-        'entity' => 'page',
+        "columns" => ['id', 'name'],
+        'entity' => 'new',
         'actionsDisplay' => [
             'edit' => 1,
-            'info' => 1
         ]
     ];
 
@@ -42,12 +39,6 @@ class PageController extends AdminBaseController
      */
     private $uploader;
 
-    /**
-     * MediaController constructor.
-     * @param Request $request
-     * @param Page $model
-     * @param UploaderClass $uploader
-     */
     public function __construct(Request $request, Page $model, UploaderClass $uploader)
     {
         $this->request = $request;
@@ -68,7 +59,7 @@ class PageController extends AdminBaseController
     {
         $this->setPageBlock($page_block);
         $this->beforeInitPaginateHook();
-        $this->viewData['items']    = ApiMenuItem::query()->whereNull('parent_id')->orderBy($this->sortColumn, $this->sortOrder)->paginate($this->limit);
+        $this->viewData['items']    = $this->model->whereNotNull('parent_id')->orderBy($this->sortColumn, $this->sortOrder)->paginate($this->limit);
         $this->afterInitPaginateHook();
         $this->viewData['gridData'] = $this->gridData;
 
@@ -81,12 +72,29 @@ class PageController extends AdminBaseController
         $this->setQueryString();
         return view($this->entityViews['list'], $this->viewData);
     }
+
+    public function beforeInitPaginateHook()
+    {
+        $page = Page::wherePageBlock(Page::NEWS)->first();
+        if (!$page) {
+            $page = Page::create([
+                'name' => "Новости",
+                'page_block' => Page::NEWS
+            ]);
+        }
+        $this->setPageBlock($page->page_block);
+    }
+
     /**
-     *
-     * Doing some actions after creating new item
-     * @param object $item
-     * @return void
+     * @param array $item
+     * @return array|void
      */
+    public function beforeCreateHook(array $item)
+    {
+        $item['parent_id'] = Page::wherePageBlock($item['page_block'])->first()->id;
+        return $item;
+    }
+
     protected function afterCreateHook($item)
     {
         if ($this->request->has('inline_blocks')) {
@@ -120,9 +128,16 @@ class PageController extends AdminBaseController
                 $this->uploader->storeFile($attachment, $entity);
             }
         }
-        $item->apiMenuItem()->create(['page_id' => $item->id]);
+        if ($this->request->hasFile('thumbnail')) {
+            $entity = [
+                'entity_type' => Page::class,
+                'entity_id'   => $item->id,
+                'position'    => 'top'
+            ];
+            $this->uploader->setDirectory('thumbnails');
+            $this->uploader->storeFile($this->request->file('thumbnail'), $entity);
+        }
     }
-
     /**
      * Doing some data operations after updating
      * @param  object $item
@@ -144,8 +159,17 @@ class PageController extends AdminBaseController
         $this->handlePNActions($item, 'inline_blocks', InlineBlock::class);
 
         $this->handlePNActions($item, 'videos', Video::class);
-    }
 
+        if ($this->request->hasFile('thumbnail')) {
+            $entity = [
+                'entity_type' => Page::class,
+                'entity_id'   => $item->id,
+                'position'    => 'top'
+            ];
+            $this->uploader->setDirectory('thumbnails');
+            $this->uploader->storeFile($this->request->file('thumbnail'), $entity);
+        }
+    }
     /**
      * handle the create update delete for proofs and inline_blocks
      *

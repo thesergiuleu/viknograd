@@ -4,71 +4,63 @@
 
 @section('content')
     @if($items->isNotEmpty())
-        <table style="width: 100%">
-            <tr>
-                @foreach ($items as $key => $item)
-                    <td valign="top">
-                        <table  class="datatable table table-striped table-bordered table-hover">
-                            <tr>
-                                <thead>
-                                <th>
-                                    <span class="pull-right">
+        <div style="display: flex">
+        @foreach($items as $key => $item)
+            <ul data-url="{{route('change_menu_position')}}" style="flex: 1 1 auto!important" id="{{$item->id}}" class="connectedSortable list-group">
+                <li id="{{$item->id}}" class="list-group-item">
+                    @if($item->children->isEmpty())
+                        <span class="pull-right">
+                            <a href="{{route('page.delete', ['id' => $item->page->id ])}}"
+                               onclick="deleteItem(event, this, 'page', false)" title="Удалить">
+                                <i class="glyphicon glyphicon-remove"></i>
+                            </a>
+                        </span>
+                    @endif
+                    @if(array_key_exists('actionsDisplay', $gridData)
+                        && isset($gridData['actionsDisplay']['edit'])
+                        && $gridData['actionsDisplay']['edit']
+                        )
+                        @if($item->page->page_block && in_array($item->page->page_block, \App\Page::PAGE_BLOCKS))
+                            <a href="{{$item->page->url()}}">
+                                {{$item->page ? $item->page->name : ''}}
+                            </a>
+                        @else
+                            <a href="{{route('page.edit', ['id' => $item->page->id , 'page_block' => $item->page->page_block])}}">
+                                {{$item->page ? $item->page->name : ''}}
+                            </a>
+                        @endif
+                    @else
+                        {{$item->page ? $item->page->name : ''}}
+                    @endif
+                </li>
+                @foreach($item->children as $k => $child)
+                    <li id="{{$child->id}}" class="list-group-item">
+                        <span class="pull-right">
                                             <a href="{{route('page.delete', ['id' => $item->page->id ])}}"
-                                               onclick="deleteItem(event, this, 'page', false)" title="Hide item">
+                                               onclick="deleteItem(event, this, 'page', false)" title="Удалить">
                                                 <i class="glyphicon glyphicon-remove"></i>
                                             </a>
                                         </span>
-                                    {{$item->page ? $item->page->name : ''}}
-                                    @if(array_key_exists('actionsDisplay', $gridData)
-                                        && isset($gridData['actionsDisplay']['edit'])
-                                        && $gridData['actionsDisplay']['edit']
-                                        )
-                                        <span class="pull-right">
-                                            <a href="{{route('page.edit', ['id' => $item->page->id , 'page_block' => $item->page->page_block])}}">
-                                                <i class="glyphicon glyphicon-edit"></i>
-                                            </a>
-                                        </span>
-                                    @endif
-                                </th>
-                                <ul id="page_div_{{$item->id}}" class="page-div list-group">
-
-                                </ul>
-                                </thead>
-                            </tr>
-                            <tbody id="sortable">
-                            @foreach($item->children as $child)
-                                <tr>
-                                    <td style="position: relative">
-                                            <span>
-                                                {{$child->page->name}}
-                                            </span>
-                                        <span class="pull-right">
-                                            <a href="{{route('page.delete', ['id' => $item->page->id ])}}"
-                                               onclick="deleteItem(event, this, 'page', false)" title="Hide item">
-                                                <i class="glyphicon glyphicon-remove"></i>
-                                            </a>
-                                        </span>
-                                        @if(array_key_exists('actionsDisplay', $gridData)
-                                            && isset($gridData['actionsDisplay']['edit'])
-                                            && $gridData['actionsDisplay']['edit']
-                                            )
-                                            <span class="pull-right">
-                                                <a href="{{route('page.edit', ['id' => $child->page->id , 'page_block' => $child->page->page_block])}}">
-                                                    <i class="glyphicon glyphicon-edit"></i>
-                                                </a>
-                                            </span>
-                                        @endif
-                                    </td>
-                                    <ul id="page_div_{{$item->id}}" class="page-div list-group">
-
-                                    </ul>
-                                </tr>
-                            @endforeach
-                            </tbody>
-                        </table>
-                    </td>
+                        @if(array_key_exists('actionsDisplay', $gridData)
+                        && isset($gridData['actionsDisplay']['edit'])
+                        && $gridData['actionsDisplay']['edit']
+                        )
+                            @if($child->page->page_block && in_array($child->page->page_block, \App\Page::PAGE_BLOCKS))
+                                <a href="{{$child->page->url()}}">
+                                    {{$child->page ? $child->page->name : ''}}
+                                </a>
+                            @else
+                                <a href="{{route('page.edit', ['id' => $child->page->id , 'page_block' => $child->page->page_block])}}">
+                                    {{$child->page ? $child->page->name : ''}}
+                                </a>
+                            @endif
+                        @else
+                            {{$child->page ? $child->page->name : ''}}
+                        @endif
+                    </li>
                 @endforeach
-            </tr>
-        </table>
+            </ul>
+        @endforeach
+        </div>
     @endif
 @endsection

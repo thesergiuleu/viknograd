@@ -11,8 +11,8 @@ class ApiController extends Controller
     public function getPages()
     {
         $pages = Page::with(['attachments', 'inline_blocks', 'inline_blocks.attachments', 'videos'])->get();
-        $json_data = json_encode($pages);
-        file_put_contents('pages.json', $json_data);
+//        $json_data = json_encode($pages);
+//        file_put_contents('pages.json', $json_data);
         return response()->json($pages);
     }
 
@@ -20,8 +20,8 @@ class ApiController extends Controller
     {
         $menuItems = ApiMenuItem::with(['page', 'children'])->whereNull('parent_id')->get();
         $data = $this->_menuItems($menuItems);
-        $json_data = json_encode($data);
-        file_put_contents('menu_items.json', $json_data);
+//        $json_data = json_encode($data);
+//        file_put_contents('menu_items.json', $json_data);
         return response()->json(array_values($data));
     }
 

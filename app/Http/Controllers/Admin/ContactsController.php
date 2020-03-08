@@ -79,7 +79,7 @@ class ContactsController extends AdminBaseController
         $page = Page::wherePageBlock(Page::CONTACTS)->first();
         if (!$page) {
             $page = Page::create([
-                'name' => "КОНТАКТЫ",
+                'name' => "Контакты",
                 'page_header' => "КОНТАКТЫ",
                 'page_block' => Page::CONTACTS
             ]);

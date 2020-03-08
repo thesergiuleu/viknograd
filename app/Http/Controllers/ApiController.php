@@ -22,7 +22,7 @@ class ApiController extends Controller
     {
         $menuItems = ApiMenuItem::with(['page', 'children'])->whereNull('parent_id')->get();
         $data = $this->_menuItems($menuItems);
-        $json_data = json_encode($menuItems);
+        $json_data = json_encode(ApiMenuItem::all());
         file_put_contents('menu_items.json', $json_data);
         return response()->json(array_values($data));
     }

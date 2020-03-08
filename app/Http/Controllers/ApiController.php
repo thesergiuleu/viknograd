@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\ApiMenuItem;
+use App\Attachment;
+use App\InlineBlock;
 use App\Page;
 use Illuminate\Http\Request;
 
@@ -11,8 +13,8 @@ class ApiController extends Controller
     public function getPages()
     {
         $pages = Page::with(['attachments', 'inline_blocks', 'inline_blocks.attachments', 'videos'])->get();
-//        $json_data = json_encode($pages);
-//        file_put_contents('pages.json', $json_data);
+        $json_data = json_encode($pages);
+        file_put_contents('pages.json', $json_data);
         return response()->json($pages);
     }
 
@@ -20,9 +22,26 @@ class ApiController extends Controller
     {
         $menuItems = ApiMenuItem::with(['page', 'children'])->whereNull('parent_id')->get();
         $data = $this->_menuItems($menuItems);
-//        $json_data = json_encode($data);
-//        file_put_contents('menu_items.json', $json_data);
+        $json_data = json_encode($data);
+        file_put_contents('menu_items.json', $json_data);
         return response()->json(array_values($data));
+    }
+
+    public function inlineBlocks()
+    {
+        $menuItems = InlineBlock::all();
+//        $data = $this->_menuItems($menuItems);
+        $json_data = json_encode($menuItems);
+        file_put_contents('inline_blocks.json', $json_data);
+        return response()->json($menuItems->values());
+    }
+    public function attachments()
+    {
+        $menuItems = Attachment::all();
+//        $data = $this->_menuItems($menuItems);
+        $json_data = json_encode($menuItems);
+        file_put_contents('attachments.json', $json_data);
+        return response()->json($menuItems->values());
     }
 
     public function getPage($id)

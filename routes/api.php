@@ -24,3 +24,5 @@ Route::get('magic', function () {
 Route::get('pages', 'ApiController@getPages');
 Route::get('pages/{id}', 'ApiController@getPage');
 Route::get('menu-items', 'ApiController@menuItems');
+Route::get('inline-blocks', 'ApiController@inlineBlocks');
+Route::get('attachments', 'ApiController@attachments');

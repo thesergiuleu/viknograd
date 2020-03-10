@@ -75,6 +75,10 @@
                                 <label for="exampleInputName">{{trans("forms.$entity.url")}}</label>
                                 <input type="text" name="videos[{{$key}}][url]" value="{{$video->url}}" class="form-control" required>
                             </div>
+                            <div class="form-group">
+                                <label>{{trans("forms.$entity.video_header")}}</label>
+                                <input type="text" name="videos[{{$key}}][header]" value="{{$video->header}}" class="form-control">
+                            </div>
                             <div class="form-check form-check-inline">
                                 <input id="video-top" {{$video->position == "top" ? 'checked' : ''}} type="radio" value="top" name="videos[{{$key}}][position]" class="form-check-input" />
                                 <label for="video-top"  class="form-check-label"> {{trans('forms.top')}}</label>

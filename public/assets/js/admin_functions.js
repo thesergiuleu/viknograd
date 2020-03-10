@@ -30,6 +30,10 @@ const elementsVideo = function (counter, name) {
         '<label for="exampleInputName">Cсылка</label>'+
         `<input type="text" name="${name}[${counter}][url]" class="form-control" required>`+
         '</div>'+
+        '<div class="form-group">'+
+        '<label>Опциональный контент</label>'+
+        `<input type="text" name="${name}[${counter}][header]" class="form-control">`+
+        '</div>'+
         '<div class="form-check form-check-inline">'+
         `<input id="video-top" type="radio" value="top" name="${name}[${counter}][position]" class="form-check-input" />`+
         '<label for="video-top" class="form-check-label"> Положение «С верху»</label>'+

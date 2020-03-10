@@ -55,7 +55,6 @@ class Page extends Model
     const PAGE_BLOCKS = [
         self::PROJECTS,
         self::CONTACTS,
-        self::OUR_WORKS,
         self::JOBS,
         self::NEWS,
     ];

@@ -56,8 +56,12 @@ class ApiController extends Controller
         if ($page->page_block == Page::CONTACTS) {
             $blocks = [];
             foreach ($page->inline_blocks->unique('name')->values() as $k => $value) {
+                $inlineBlocks = $page->inline_blocks()->where('name', $value->name)->get();
+                foreach ($inlineBlocks as $block) {
+                    $block->file_url = $block->attachment_url;
+                }
                 $blocks[$k]['city'] = $value->name;
-                $blocks[$k]['persons'] = $page->inline_blocks()->where('name', $value->name)->get()->toArray();
+                $blocks[$k]['persons'] = $inlineBlocks->toArray();
             }
             $page['contacts'] = $blocks;
         }

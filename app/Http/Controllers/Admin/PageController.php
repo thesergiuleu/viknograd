@@ -36,7 +36,7 @@ class PageController extends AdminBaseController
         ]
     ];
 
-    protected $sortColumn = 'id';
+    protected $sortColumn = 'position';
     /**
      * @var UploaderClass
      */

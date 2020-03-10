@@ -48,8 +48,18 @@ class ApiController extends Controller
     {
         $page = Page::with(['attachments', 'inline_blocks', 'inline_blocks.attachments', 'videos'])->findOrFail($id);
         $page['news'] = Page::wherePageBlock(Page::NEWS)->first() ? Page::wherePageBlock(Page::NEWS)->first()->childrenFormed() : null;
+
         foreach ($page->inline_blocks as $inline_block) {
             $inline_block->file_url = $inline_block->attachment_url;
+        }
+
+        if ($page->page_block == Page::CONTACTS) {
+            $blocks = [];
+            foreach ($page->inline_blocks->unique('name')->values() as $k => $value) {
+                $blocks[$k]['city'] = $value->name;
+                $blocks[$k]['persons'] = $page->inline_blocks()->where('name', $value->name)->get()->toArray();
+            }
+            $page['contacts'] = $blocks;
         }
         return response()->json($page);
     }

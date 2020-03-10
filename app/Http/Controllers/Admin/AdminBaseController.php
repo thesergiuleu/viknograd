@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\InlineBlock;
 use App\Libraries\Uploader\UploaderClass;
+use App\Page;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
@@ -86,10 +87,11 @@ class AdminBaseController extends Controller
     {
         $this->viewData['pages']            = config('admin.pages');
         $this->viewData['activeRoute']      = $this->extractEntityFromRoute(Route::currentRouteName());
-        $url = request()->url();
-        preg_match("/\/(\d+)$/",$url,$matches);
-        if (!empty($matches)) {
-            $this->setPageBlock($matches[1]);
+//        $url = request()->url();
+//        preg_match("/\/(\d+)$/",$url,$matches);
+//        dd($url);
+        if ($this->page_block) {
+            $this->setPageBlock($this->page_block);
         }
         $this->viewData['entity']           = $this->entity;
         $this->viewData['page_block']          = $this->page_block;
@@ -357,6 +359,8 @@ class AdminBaseController extends Controller
      */
     protected function beforeCreateHook(array $item)
     {
+        if ($this->page_block)
+            $item['page_id'] = Page::wherePageBlock($this->page_block)->first()->id;
         return $item;
     }
 

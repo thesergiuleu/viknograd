@@ -22,7 +22,7 @@ class OurWorksController extends AdminBaseController
      */
     protected $project;
 
-    protected $page_block = null;
+    protected $page_block = Page::OUR_WORKS;
 
     protected $gridData = [
         "columns" => ['id', 'name', 'url'],
@@ -87,16 +87,6 @@ class OurWorksController extends AdminBaseController
             ApiMenuItem::create(['page_id' => $page->id]);
         }
         $this->setPageBlock($page->page_block);
-    }
-
-    /**
-     * @param array $item
-     * @return array|void
-     */
-    public function beforeCreateHook(array $item)
-    {
-        $item['page_id'] = Page::wherePageBlock($item['page_block'])->first()->id;
-        return $item;
     }
 
     protected function afterCreateHook($item)

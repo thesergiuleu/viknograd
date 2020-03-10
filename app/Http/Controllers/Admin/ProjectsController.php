@@ -21,7 +21,7 @@ class ProjectsController extends AdminBaseController
      */
     protected $project;
 
-    protected $page_block = null;
+    protected $page_block = Page::PROJECTS;
 
     protected $gridData = [
         "columns" => ['id', 'name', 'url'],
@@ -93,15 +93,6 @@ class ProjectsController extends AdminBaseController
         $this->setPageBlock($page->page_block);
     }
 
-    /**
-     * @param array $item
-     * @return array|void
-     */
-    public function beforeCreateHook(array $item)
-    {
-        $item['page_id'] = Page::wherePageBlock($item['page_block'])->first()->id;
-        return $item;
-    }
 
     protected function afterCreateHook($item)
     {

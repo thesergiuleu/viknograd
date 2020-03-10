@@ -84,16 +84,16 @@
                             <input type="hidden" value="{{$video->id}}" name="videos[{{$key}}][id]">
                             <div class="form-group required ">
                                 <span style="color: #3097d1; cursor: pointer" data-data="videos" data-id="{{$key}}" onclick="removeReviewSection(this)" class="pull-right"><i class="glyphicon glyphicon-remove"></i></span>
-                                <label for="exampleInputName">URL</label>
+                                <label for="exampleInputName">{{trans("forms.$entity.url")}}</label>
                                 <input type="text" name="videos[{{$key}}][url]" value="{{$video->url}}" class="form-control" required>
                             </div>
                             <div class="form-check form-check-inline">
                                 <input id="video-top" {{$video->position == "top" ? 'checked' : ''}} type="radio" value="top" name="videos[{{$key}}][position]" class="form-check-input" />
-                                <label for="video-top"  class="form-check-label"> Position Top</label>
+                                <label for="video-top"  class="form-check-label">  {{trans('forms.top')}}</label>
                             </div>
                             <div class="form-check form-check-inline">
                                 <input id="video-bottom" type="radio" {{$video->position == "bottom" ? 'checked' : ''}} value="bottom" name="videos[{{$key}}][position]" class="form-check-input" />
-                                <label for="video-bottom" class="form-check-label"> Position Bottom</label>
+                                <label for="video-bottom" class="form-check-label">  {{trans('forms.bottom')}}</label>
                             </div>
                         </div>
                         <br>
@@ -115,11 +115,11 @@
                             <input type="hidden" value="{{$inlineBlock->id}}" name="inline_blocks[{{$key}}][id]">
                             <div class="form-group required ">
                                 <span style="color: #3097d1; cursor: pointer" data-data="inline_blocks" data-id="{{$key}}" onclick="removeReviewSection(this)" class="pull-right"><i class="glyphicon glyphicon-remove"></i></span>
-                                <label for="exampleInputName">Title</label>
+                                <label for="exampleInputName">{{trans("forms.$entity.inline_name")}}</label>
                                 <input type="text" name="inline_blocks[{{$key}}][name]" class="form-control" value="{{$inlineBlock->name}}" required>
                                 </div>
                             <div class="form-group required">
-                                <label>Body</label>
+                                <label>{{trans("forms.$entity.body")}}</label>
                                 @component('admin.form_elements.text_area_editor', [
                                         'editorName' => "inline_blocks[$key][body]",
                                         'editorId' => 'body_'.$key
@@ -128,7 +128,7 @@
                                 @endcomponent
                                 </div>
                             <div class="form-group">
-                                <label>Link</label>
+                                <label>{{trans("forms.$entity.url")}}</label>
                                 <input class="form-control" type="text" name="inline_blocks[{{$key}}][url]" value="{{$inlineBlock->url}}">
                             </div>
                             <div class="form-group required">

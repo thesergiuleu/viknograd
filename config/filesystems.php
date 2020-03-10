@@ -71,6 +71,7 @@ return [
         'image/gif'                                      => 'image',
         'image/x-icon'                                   => 'image',
         'image/jpeg'                                     => 'image',
+        'image/jpg'                                      => 'image',
         'image/png'                                      => 'image',
         'application/pdf'                                => 'file',
         'application/vnd.ms-powerpoint'                  => 'file',

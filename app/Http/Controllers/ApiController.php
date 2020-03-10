@@ -65,6 +65,15 @@ class ApiController extends Controller
             }
             $page['contacts'] = $blocks;
         }
+        if ($page->page_block == Page::OUR_WORKS) {
+            $blocks = [];
+            foreach ($page->videos->unique('header')->values() as $k => $value) {
+                $inlineBlocks = $page->videos()->where('header', $value->header)->get();
+                $blocks[$k]['city'] = $value->header;
+                $blocks[$k]['persons'] = $inlineBlocks->toArray();
+            }
+            $page['contacts'] = $blocks;
+        }
         return response()->json($page);
     }
 

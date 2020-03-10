@@ -197,9 +197,8 @@ class NewsController extends AdminBaseController
                     $this->uploader->storeFile($file[$key]['attachments'], $entity);
                 }
             }
-            unset($update['id']);
             unset($update['attachments']);
-            $item->$relation()->update($update);
+            $item->$relation()->whereId($update['id'])->update($update);
 
         }
         foreach ($sortedData['create'] as $create) {

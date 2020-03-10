@@ -26,3 +26,4 @@ Route::get('pages/{id}', 'ApiController@getPage');
 Route::get('menu-items', 'ApiController@menuItems');
 Route::get('inline-blocks', 'ApiController@inlineBlocks');
 Route::get('attachments', 'ApiController@attachments');
+Route::get('videos', 'ApiController@videos');

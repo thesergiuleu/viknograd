@@ -6,6 +6,7 @@ use App\ApiMenuItem;
 use App\Attachment;
 use App\InlineBlock;
 use App\Page;
+use App\Video;
 use Illuminate\Http\Request;
 
 class ApiController extends Controller
@@ -41,6 +42,14 @@ class ApiController extends Controller
 //        $data = $this->_menuItems($menuItems);
 //        $json_data = json_encode($menuItems);
 //        file_put_contents('attachments.json', $json_data);
+        return response()->json($menuItems->values());
+    }
+    public function videos()
+    {
+        $menuItems = Video::all();
+//        $data = $this->_menuItems($menuItems);
+//        $json_data = json_encode($menuItems);
+//        file_put_contents('videos.json', $json_data);
         return response()->json($menuItems->values());
     }
 

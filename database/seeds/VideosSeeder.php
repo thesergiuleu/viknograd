@@ -14,7 +14,7 @@ class VideosSeeder extends Seeder
         $file = file_get_contents(env('APP_URL') . '/videos.json');
         foreach (json_decode($file) as $item) {
             \App\Video::updateOrCreate(['id' => $item->id], [
-                'name' => $item->name,
+                'page_id' => $item->page_id,
                 'header' => $item->header,
                 'url' => $item->url,
                 'position' => $item->position,

@@ -16,5 +16,6 @@ class DatabaseSeeder extends Seeder
          $this->call(InlineBlocksSeeder::class);
          $this->call(AttachmentsSeeder::class);
          $this->call(MenuItemsSeeder::class);
+         $this->call(VideosSeeder::class);
     }
 }

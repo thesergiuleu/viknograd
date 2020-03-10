@@ -26,6 +26,7 @@ Route::group(['middleware' => ['admin'], 'prefix' => 'admin'], function () {
 
         //attachments routes
         Route::post('/attachment/insert', 'Admin\AttachmentsController@upload_from_editor')->name('attachment.insert');
+        Route::post('/attachment/change_position/{id}', 'Admin\AttachmentsController@change_position')->name('attachment.change_position');
         Route::delete('/attachment/delete/{id}', 'Admin\AttachmentsController@destroy')->name('attachment.delete')->where('id', '[0-9]+');
 
         //pages

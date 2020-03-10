@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Attachment;
 use App\Libraries\Uploader\UploaderClass;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -57,5 +58,13 @@ class AttachmentsController extends AdminBaseController
         ]);
         return response()->json(['html' => $view->render()]);
 
+    }
+
+    public function change_position($id)
+    {
+        $attachment = Attachment::query()->findOrFail($id);
+        $attachment->position = $this->request->get('value');
+        $attachment->save();
+        return response()->json($attachment);
     }
 }

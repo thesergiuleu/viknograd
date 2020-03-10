@@ -167,3 +167,18 @@ $( function() {
     }).disableSelection();
 });
 
+function changeAttachmentPosition(url, element) {
+    $.ajax({
+        type: "POST",
+        url: url,
+        dataType: 'json',
+        data: {value: element.value},
+        success: function (resp) {
+
+        },
+        error: function (error) {
+            console.warn(error);
+        }
+    });
+}
+

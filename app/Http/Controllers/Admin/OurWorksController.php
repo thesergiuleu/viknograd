@@ -6,6 +6,7 @@ use App\ApiMenuItem;
 use App\InlineBlock;
 use App\Libraries\Uploader\UploaderClass;
 use App\Page;
+use App\Video;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -78,6 +79,7 @@ class OurWorksController extends AdminBaseController
         if (!$page) {
             $page = Page::create([
                 'name' => "НАШИ РАБОТЫ",
+                'page_header' => "НАШИ РАБОТЫ",
                 'page_block' => Page::OUR_WORKS
             ]);
             ApiMenuItem::create(['page_id' => $page->id]);
@@ -85,21 +87,76 @@ class OurWorksController extends AdminBaseController
         $this->setPageBlock($page->page_block);
     }
 
-    protected function afterCreateHook($item)
-    {
-        if ($this->request->hasFile('attachments')) {
-            $entity = [
-                'entity_type' => InlineBlock::class,
-                'entity_id'   => $item->id,
-                'position'    => 'top'
-            ];
-            $this->uploader->setDirectory('inline_blocks_' . $item->id);
-            $this->uploader->storeFile($this->request->file('attachments'), $entity);
-        }
-    }
-
+    /**
+     * Doing some data operations after updating
+     * @param  object $item
+     * @return void
+     */
     protected function afterUpdateHook($item)
     {
-        $this->afterCreateHook($item);
+        if ($this->request->hasFile('attachments')) {
+            foreach ($this->request->file('attachments') as $attachment) {
+                $entity = [
+                    'entity_type' => Page::class,
+                    'entity_id'   => $item->id,
+                    'position'    => 'bottom'
+                ];
+                $this->uploader->setDirectory('pages_' . $item->id);
+                $this->uploader->storeFile($attachment, $entity);
+            }
+        }
+
+        $this->handlePNActions($item, 'videos', Video::class);
+    }
+
+    /**
+     * handle the create update delete for proofs and inline_blocks
+     *
+     * @param $item
+     * @param string $relation
+     * @param string $class
+     */
+    protected function handlePNActions($item, $relation = 'inline_blocks', $class = 'App\InlineBlock')
+    {
+        if (!$this->request->has($relation))
+            $this->request[$relation] = [];
+
+        $oldData     = $item->{$relation}->toArray();
+        $sortedData  = crudPartition($oldData, $this->request[$relation]);
+        foreach ($sortedData['update'] as $update) {
+            foreach ($this->request->get($relation) as $key => $value) {
+                $file = $this->request->file($relation);
+                if ( $file && array_key_exists($key, $file) ) {
+                    $entity = [
+                        'entity_type' => $class,
+                        'entity_id'   => $update['id'],
+                        'position'    => 'top'
+                    ];
+                    $this->uploader->setDirectory($relation . '_' . $update['id']);
+                    $this->uploader->storeFile($file[$key]['attachments'], $entity);
+                }
+            }
+            unset($update['attachments']);
+            $item->$relation()->whereId($update['id'])->update($update);
+
+        }
+        foreach ($sortedData['create'] as $create) {
+            $created = $item->$relation()->create($create);
+            foreach ($this->request->get($relation) as $key => $value) {
+                $file = $this->request->file($relation);
+                if ( $file && array_key_exists($key, $file) ) {
+                    $entity = [
+                        'entity_type' => $class,
+                        'entity_id'   => $created->id,
+                        'position'    => 'top'
+                    ];
+                    $this->uploader->setDirectory($relation . '_' . $created->id);
+                    $this->uploader->storeFile($file[$key]['attachments'], $entity);
+                }
+            }
+        }
+        foreach ($sortedData['delete'] as $delete) {
+            $item->$relation()->whereId($delete['id'])->delete();
+        }
     }
 }

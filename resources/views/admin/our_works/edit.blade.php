@@ -94,49 +94,6 @@
                     <button type="button" onclick="addSection('videos', false)" class="btn btn-primary">{{trans('actions.add')}}</button>
                 </div>
             </div>
-            <hr>
-            <h3>{{trans("forms.$entity.inline_blocks")}}</h3>
-            <div class="row" id="inline-block-div">
-                @foreach($item->inline_blocks as $key => $inlineBlock)
-                    <div class="col-md-12" data-counter="{{$key}}inline_blocks">
-                        <div class="my-card">
-                            <input type="hidden" value="{{$inlineBlock->id}}" name="inline_blocks[{{$key}}][id]">
-                            <div class="form-group required ">
-                                <span style="color: #3097d1; cursor: pointer" data-data="inline_blocks" data-id="{{$key}}" onclick="removeReviewSection(this)" class="pull-right"><i class="glyphicon glyphicon-remove"></i></span>
-                                <label for="exampleInputName">Title</label>
-                                <input type="text" name="inline_blocks[{{$key}}][name]" class="form-control" value="{{$inlineBlock->name}}" required>
-                                </div>
-                            <div class="form-group required">
-                                <label>Body</label>
-                                @component('admin.form_elements.text_area_editor', [
-                                        'editorName' => "inline_blocks[$key][body]",
-                                        'editorId' => 'body_'.$key
-                                        ])
-                                    {{$inlineBlock->body}}
-                                @endcomponent
-                                </div>
-                            <div class="form-group">
-                                <label>Link</label>
-                                <input class="form-control" type="text" name="inline_blocks[{{$key}}][url]" value="{{$inlineBlock->url}}">
-                            </div>
-                            <div class="form-group required">
-                                @component('admin.form_elements.simple_file_input', [
-                                     'fileInstances' =>  $inlineBlock->attachments->isNotEmpty() ? $inlineBlock->attachments : false,
-                                     'inputName' => "inline_blocks[$key][attachments]",
-                                     'has_input' => false,
-                                     ])
-                                @endcomponent
-                            </div>
-                        </div>
-                        <br>
-                    </div>
-                @endforeach
-            </div>
-            <div class="form-group clearfix">
-                <div class="pull-left">
-                    <button type="button" onclick="addSection('inline_blocks')" class="btn btn-primary">{{trans('actions.add')}}</button>
-                </div>
-            </div>
             <div class="form-group clearfix">
                 <div class="pull-right">
                     <a href="{{route($entity)}}" class="btn btn-default">{{trans('actions.cancel')}}</a>

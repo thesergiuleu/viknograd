@@ -31,7 +31,6 @@ class ApiController extends Controller
     public function inlineBlocks()
     {
         $menuItems = InlineBlock::all();
-//        $data = $this->_menuItems($menuItems);
 //        $json_data = json_encode($menuItems);
 //        file_put_contents('inline_blocks.json', $json_data);
         return response()->json($menuItems->values());
@@ -39,7 +38,6 @@ class ApiController extends Controller
     public function attachments()
     {
         $menuItems = Attachment::all();
-//        $data = $this->_menuItems($menuItems);
 //        $json_data = json_encode($menuItems);
 //        file_put_contents('attachments.json', $json_data);
         return response()->json($menuItems->values());
@@ -47,7 +45,6 @@ class ApiController extends Controller
     public function videos()
     {
         $menuItems = Video::all();
-//        $data = $this->_menuItems($menuItems);
 //        $json_data = json_encode($menuItems);
 //        file_put_contents('videos.json', $json_data);
         return response()->json($menuItems->values());

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,8 +19,9 @@ Route::post('/register', 'Auth\AuthenticationController@register');
 Route::post('/login', 'Auth\AuthenticationController@login');
 
 Route::get('magic', function () {
-   $items = \App\Page::all();
-   file_put_contents('pages.json',  json_encode($items));
+    $newFile = new UploadedFile( public_path() . '/assets/projects/1.jpg', '1.jpg', 'image/jpeg',null,null, true);
+
+   dd($newFile);
 });
 Route::get('pages', 'ApiController@getPages');
 Route::get('pages/{id}', 'ApiController@getPage');

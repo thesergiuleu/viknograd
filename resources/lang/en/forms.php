@@ -10,6 +10,16 @@ return [
         'videos'             => 'Видео',
         'inline_blocks'      => 'Опциональный контент',
     ],
+    'our_work' => [
+        'name'               => 'Название',
+        'inline_name'        => 'Ключевое слово',
+        'url'                => 'Cсылка',
+        'body'               => 'Контент',
+        'page_header'        => 'Заголовок',
+        'attachments'        => 'Фотографии',
+        'videos'             => 'Видео',
+        'inline_blocks'      => 'Опциональный контент',
+    ],
     'project' => [
         'name'               => 'Название',
         'body'               => 'Контент',

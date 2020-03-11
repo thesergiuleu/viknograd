@@ -78,7 +78,7 @@ class ApiController extends Controller
                 $blocks[$k]['name'] = $value->header;
                 $blocks[$k]['list'] = $inlineBlocks->toArray();
             }
-            $page['contacts'] = $blocks;
+            $page['our_works'] = $blocks;
         }
         return response()->json($page);
     }

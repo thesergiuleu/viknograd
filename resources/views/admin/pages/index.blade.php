@@ -36,7 +36,7 @@
                 @foreach($item->children as $k => $child)
                     <li id="{{$child->id}}" class="list-group-item">
                         <span class="pull-right">
-                                            <a href="{{route('page.delete', ['id' => $item->page->id ])}}"
+                                            <a href="{{route('page.delete', ['id' => $child->page->id ])}}"
                                                onclick="deleteItem(event, this, 'page', false)" title="Удалить">
                                                 <i class="glyphicon glyphicon-remove"></i>
                                             </a>

@@ -78,8 +78,8 @@ class ApiController extends Controller
             $blocks = [];
             foreach ($page->videos->unique('header')->values() as $k => $value) {
                 $inlineBlocks = $page->videos()->where('header', $value->header)->get();
-                $blocks[$k]['city'] = $value->header;
-                $blocks[$k]['persons'] = $inlineBlocks->toArray();
+                $blocks[$k]['name'] = $value->header;
+                $blocks[$k]['list'] = $inlineBlocks->toArray();
             }
             $page['contacts'] = $blocks;
         }

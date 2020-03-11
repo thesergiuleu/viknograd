@@ -29,7 +29,6 @@ class OurWorksController extends AdminBaseController
         'entity' => 'our_work',
         'actionsDisplay' => [
             'edit' => 1,
-            'info' => 1
         ]
     ];
 
@@ -39,14 +38,13 @@ class OurWorksController extends AdminBaseController
      */
     private $uploader;
 
-    public function __construct(Request $request, InlineBlock $model, UploaderClass $uploader)
+    public function __construct(Request $request, Page $model, UploaderClass $uploader)
     {
         $this->request = $request;
         $this->model   = $model;
         $this->setMessages();
         $this->setViews();
         parent::__construct();
-        $this->addNewItemRoute = $this->entity . '.add';
         $this->uploader = $uploader;
     }
 
@@ -60,9 +58,7 @@ class OurWorksController extends AdminBaseController
     {
         $this->setPageBlock($page_block);
         $this->beforeInitPaginateHook();
-        $this->viewData['items']    = $this->model->whereHas('page', function ($query) {
-            $query->where('page_block', $this->page_block);
-        })->orderBy($this->sortColumn, $this->sortOrder)->paginate($this->limit);
+        $this->viewData['items']    = $this->model->where('page_block', $this->page_block)->orderBy($this->sortColumn, $this->sortOrder)->paginate($this->limit);
         $this->afterInitPaginateHook();
         $this->viewData['gridData'] = $this->gridData;
 

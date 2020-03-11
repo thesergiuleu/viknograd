@@ -85,6 +85,16 @@ class NewsController extends AdminBaseController
         $this->setPageBlock($page->page_block);
     }
 
+    /**
+     * @param array $item
+     * @return array|void
+     */
+    public function beforeCreateHook(array $item)
+    {
+        $item['parent_id'] = Page::wherePageBlock($item['page_block'])->first()->id;
+        return parent::beforeCreateHook($item);
+    }
+
 
     protected function afterCreateHook($item)
     {

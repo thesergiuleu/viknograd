@@ -17,6 +17,7 @@ return [
     'replace' => 'Заменять',
 
     'logout' => 'Выйти',
+    'login' => 'Войти',
     'restore' => 'Восстановить',
     'register' => 'Регистрировать',
     'pages-title' => [

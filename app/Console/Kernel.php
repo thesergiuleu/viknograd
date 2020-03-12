@@ -18,6 +18,7 @@ class Kernel extends ConsoleKernel
         Commands\ImportTenYears::class,
         Commands\ImportPanelsOrder::class,
         Commands\ImportCorporate::class,
+        Commands\ImportUser::class,
 
     ];
 

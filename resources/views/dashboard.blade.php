@@ -5,7 +5,7 @@
 @section('content')
 
     <div class="panel panel-default">
-        <div class="panel-heading">Dashboard</div>
+        <div class="panel-heading">Админ панель</div>
 
         <div class="panel-body">
             @if (session('status'))
@@ -14,7 +14,7 @@
                 </div>
             @endif
 
-            You are <a href="{{route('logout')}}">logged in as {{auth()->user()->name}}!</a>
+                Вы зашли за  <a href="{{route('logout')}}"> {{auth()->user()->name}}!</a>
         </div>
     </div>
 

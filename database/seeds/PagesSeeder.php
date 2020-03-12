@@ -18,6 +18,7 @@ class PagesSeeder extends Seeder
                 'page_header' => $page->page_header,
                 'body' => $page->body,
                 'page_block' => $page->page_block,
+                'parent_id' => $page->parent_id,
             ]);
         }
     }

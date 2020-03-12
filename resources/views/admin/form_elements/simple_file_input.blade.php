@@ -17,17 +17,17 @@
             </div>
             <br>
             <div class="form-control-file">
-                <img src="{{asset('storage/'.$fileInstance->file)}}" alt="" class="img-rounded fluid-img">
+                <img style="height: 400px; width: 100%;" src="{{asset('storage/'.$fileInstance->file)}}" alt="" class="img-rounded fluid-img">
             </div>
             @if($has_input)
-            <div class="form-check form-check-inline">
-                <input id="attachment-top" {{$fileInstance->position == "top" ? 'checked' : ''}} type="radio" onclick="changeAttachmentPosition('{{route('attachment.change_position', $fileInstance->id)}}', this)" value="top" class="form-check-input" />
-                <label for="attachment-top"  class="form-check-label"> {{trans('forms.top')}}</label>
-            </div>
-            <div class="form-check form-check-inline">
-                <input id="attachment-bottom" type="radio" {{$fileInstance->position == "bottom" ? 'checked' : ''}} onclick="changeAttachmentPosition('{{route('attachment.change_position', $fileInstance->id)}}', this)" value="bottom" class="form-check-input" />
-                <label for="attachment-bottom" class="form-check-label"> {{trans('forms.bottom')}}</label>
-            </div>
+                <div class="form-check form-check-inline">
+                    <input id="attachment-top" {{$fileInstance->position == "top" ? 'checked' : ''}} type="radio" onclick="changeAttachmentPosition('{{route('attachment.change_position', $fileInstance->id)}}', this)" value="top" class="form-check-input" />
+                    <label for="attachment-top"  class="form-check-label"> {{trans('forms.top')}}</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input id="attachment-bottom" type="radio" {{$fileInstance->position == "bottom" ? 'checked' : ''}} onclick="changeAttachmentPosition('{{route('attachment.change_position', $fileInstance->id)}}', this)" value="bottom" class="form-check-input" />
+                    <label for="attachment-bottom" class="form-check-label"> {{trans('forms.bottom')}}</label>
+                </div>
             @endif
         </div>
     @endforeach

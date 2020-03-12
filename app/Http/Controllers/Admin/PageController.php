@@ -36,7 +36,7 @@ class PageController extends AdminBaseController
         ]
     ];
 
-    protected $sortColumn = 'position';
+    protected $sortColumn = 'top_position';
     /**
      * @var UploaderClass
      */
@@ -120,7 +120,8 @@ class PageController extends AdminBaseController
                 $this->uploader->storeFile($attachment, $entity);
             }
         }
-        $item->apiMenuItem()->create(['page_id' => $item->id]);
+        $maxTopPosition = ApiMenuItem::query()->max('top_position');
+        $item->apiMenuItem()->create(['page_id' => $item->id, 'top_position' => $maxTopPosition+1]);
     }
 
     /**

@@ -43,7 +43,7 @@ use Illuminate\Support\Carbon;
  */
 class Page extends Model
 {
-    protected $fillable = ['name', 'page_header','url', 'body', 'page_block', 'parent_id'];
+    protected $fillable = ['name', 'page_header','url', 'body', 'page_block', 'parent_id', 'created_at'];
 
     const PROJECTS      = 1;
     const CONTACTS      = 2;

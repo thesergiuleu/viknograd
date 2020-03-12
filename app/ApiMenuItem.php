@@ -26,7 +26,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class ApiMenuItem extends Model
 {
-    protected $fillable = ['parent_id', 'page_id', 'position'];
+    protected $fillable = ['parent_id', 'page_id', 'position','top_position'];
 
     public function parent()
     {

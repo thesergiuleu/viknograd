@@ -157,10 +157,19 @@ $( function() {
             to = event.target.id;
         },
         stop: function (event, ui) {
+            let li = $(ui.item[0].parentElement.children);
+            let data = [];
+            for (let i = 0; i < li.length; i++) {
+                let to_push = {
+                    index: i,
+                    id: li[i].id
+                };
+                data.push(to_push)
+            }
             $.ajax({
                 url: `${event.target.dataset.url}`,
                 type: 'post',
-                data: {from: from, to: to, from_position: from_position, to_position: to_position, id: ui.item[0].id},
+                data: {data: data, from: from, to: to, from_position: from_position, to_position: to_position, id: ui.item[0].id},
                 async: true,
                 success: function (response) {
 
@@ -185,4 +194,5 @@ function changeAttachmentPosition(url, element) {
         }
     });
 }
+
 

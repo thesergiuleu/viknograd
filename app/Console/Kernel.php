@@ -15,6 +15,9 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         Commands\ImportProjects::class,
         Commands\OurWorks::class,
+        Commands\ImportTenYears::class,
+        Commands\ImportPanelsOrder::class,
+        Commands\ImportCorporate::class,
 
     ];
 

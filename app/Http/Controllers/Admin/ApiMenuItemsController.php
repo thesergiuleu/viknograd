@@ -72,11 +72,19 @@ class ApiMenuItemsController extends AdminBaseController
         $menuItem = $this->model->where('id', $this->request->get('id'))->first();
 
         if ($menuItem && $menuItem->children->isEmpty()) {
-//            $menuItems = $this->model->whereParentId($menuItem->parent_id)->get();
             if ($this->request->get('from') != $this->request->get('to')) {
                 $menuItem->parent_id = $this->request->get('to');
             }
-            $menuItem->position  = $this->request->get('to_position');
+
+            foreach ($this->request->get('data') as $key => $value) {
+                $position = $value['index'];
+                $id       = $value['id'];
+                $item = $this->model->whereId($id)->first();
+                if ($item) {
+                    $item->position = $position;
+                    $item->save();
+                }
+            }
             $menuItem->save();
             return $menuItem;
         }

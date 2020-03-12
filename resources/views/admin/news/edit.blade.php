@@ -21,13 +21,27 @@
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <div class="form-group required">
+                    <div class="form-group">
                         <label for="exampleInputName">{{trans("forms.$entity.page_header")}}</label>
                         <input type="text" name="page_header" class="form-control" value="{{$item->page_header}}">
                         @if ($errors->has('page_header'))
                             <div class="has-error">
                          <span class="help-block">
                             <strong>{{ $errors->first('page_header') }}</strong>
+                        </span>
+                            </div>
+
+                        @endif
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="exampleInputName">{{trans("forms.$entity.created_at")}}</label>
+                        <input type="date" name="created_at" class="form-control" value="{{\Carbon\Carbon::parse($item->created_at)->format('Y-m-d')}}">
+                        @if ($errors->has('created_at'))
+                            <div class="has-error">
+                         <span class="help-block">
+                            <strong>{{ $errors->first('created_at') }}</strong>
                         </span>
                             </div>
 

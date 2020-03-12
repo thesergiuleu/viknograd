@@ -21,7 +21,7 @@ class ApiController extends Controller
 
     public function menuItems()
     {
-        $menuItems = ApiMenuItem::with(['page', 'children'])->whereNull('parent_id')->get();
+        $menuItems = ApiMenuItem::with(['page', 'children'])->orderBy('top_position')->whereNull('parent_id')->get();
         $data = $this->_menuItems($menuItems);
 //        $json_data = json_encode(ApiMenuItem::all());
 //        file_put_contents('menu_items.json', $json_data);
@@ -89,11 +89,12 @@ class ApiController extends Controller
         foreach ($collection as $item) {
             $children = [];
             if ($item->children->isNotEmpty()) {
-                $children = $this->_menuItems($item->children);
+                $children = $this->_menuItems($item->children->sortBy('position'));
             }
             $data[$item->id]['page_id']     = $item->page_id;
             $data[$item->id]['name']        = $item->page->name;
             $data[$item->id]['path']        = $item->page->url;
+            $data[$item->id]['position']    = $item->top_position;
             $data[$item->id]['page_block']  = $item->page->page_block;
             $data[$item->id]['content']     = array_values($children);
         }

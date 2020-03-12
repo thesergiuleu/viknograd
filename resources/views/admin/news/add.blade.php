@@ -20,7 +20,7 @@
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <div class="form-group required">
+                    <div class="form-group">
                         <label for="exampleInputName">{{trans("forms.$entity.page_header")}}</label>
                         <input type="text" name="page_header" class="form-control">
                         @if ($errors->has('page_header'))
@@ -31,16 +31,22 @@
                             </div>
                         @endif
                     </div>
+
                 </div>
-{{--                <div class="col-md-1">--}}
-{{--                    <label for="eventStatus">{{trans("forms.$entity.is_active")}}</label>--}}
-{{--                    <div class="checkbox">--}}
-{{--                        <label>--}}
-{{--                            <input type="hidden" name="is_active" value="0">--}}
-{{--                            <input type="checkbox" name="is_active" value="1" {{old('is_active') == 1 ? 'checked' : ''}}> {{trans("forms.$entity.is_active")}}--}}
-{{--                        </label>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="exampleInputName">{{trans("forms.$entity.created_at")}}</label>
+                        <input type="date" name="created_at" class="form-control">
+                        @if ($errors->has('created_at'))
+                            <div class="has-error">
+                         <span class="help-block">
+                            <strong>{{ $errors->first('created_at') }}</strong>
+                        </span>
+                            </div>
+                        @endif
+                    </div>
+                </div>
+
             </div>
             <div class="form-group">
                 <label for="exampleInputLogo">{{trans("forms.$entity.thumbnail")}}</label>

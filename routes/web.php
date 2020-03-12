@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::get('/', function () {
-    return view('welcome');
+    abort(403);
 });
 
 Route::group(['middleware' => ['admin'], 'prefix' => 'admin'], function () {

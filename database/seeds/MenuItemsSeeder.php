@@ -16,6 +16,8 @@ class MenuItemsSeeder extends Seeder
             \App\ApiMenuItem::updateOrCreate(['id' => $item->id], [
                 'parent_id' => $item->parent_id,
                 'page_id' => $item->page_id,
+                'position' => $item->position,
+                'top_position' => $item->top_position,
             ]);
         }
     }

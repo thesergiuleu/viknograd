@@ -8,14 +8,6 @@
         @foreach($items as $key => $item)
             <ul data-url="{{route('change_menu_position')}}" style="flex: 1 1 auto!important" id="{{$item->id}}" class="connectedSortable list-group">
                 <li id="{{$item->id}}" class="list-group-item">
-                    @if($item->children->isEmpty())
-                        <span class="pull-right">
-                            <a href="{{route('page.delete', ['id' => $item->page->id ])}}"
-                               onclick="deleteItem(event, this, 'page', false)" title="Удалить">
-                                <i class="glyphicon glyphicon-remove"></i>
-                            </a>
-                        </span>
-                    @endif
                     @if(array_key_exists('actionsDisplay', $gridData)
                         && isset($gridData['actionsDisplay']['edit'])
                         && $gridData['actionsDisplay']['edit']

@@ -75,13 +75,21 @@
                                 <label for="exampleInputName">{{trans("forms.$entity.url")}}</label>
                                 <input type="text" name="videos[{{$key}}][url]" value="{{$video->url}}" class="form-control" required>
                             </div>
-                            <div class="form-check form-check-inline">
-                                <input id="video-top" {{$video->position == "top" ? 'checked' : ''}} type="radio" value="top" name="videos[{{$key}}][position]" class="form-check-input" />
-                                <label for="video-top"  class="form-check-label"> {{trans('forms.top')}}</label>
+                            <div class="form-group">
+                                <label>Опциональный контент</label>
+                                <select type="text" name="videos[{{$key}}][header]" class="form-control">
+                                    @foreach($options as $option)
+                                        <option @if($option == $video->header) selected @endif value="{{$option}}">{{$option}}</option>
+                                    @endforeach
+                                </select>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input id="video-bottom" type="radio" {{$video->position == "bottom" ? 'checked' : ''}} value="bottom" name="videos[{{$key}}][position]" class="form-check-input" />
-                                <label for="video-bottom" class="form-check-label"> {{trans('forms.bottom')}}</label>
+                                <input  {{$video->position == "top" ? 'checked' : ''}} type="radio" value="top" name="videos[{{$key}}][position]" class="form-check-input" />
+                                <label   class="form-check-label"> {{trans('forms.top')}}</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input  type="radio" {{$video->position == "bottom" ? 'checked' : ''}} value="bottom" name="videos[{{$key}}][position]" class="form-check-input" />
+                                <label  class="form-check-label"> {{trans('forms.bottom')}}</label>
                             </div>
                         </div>
                         <br>
@@ -91,7 +99,7 @@
             </div>
             <div class="form-group clearfix">
                 <div class="pull-left">
-                    <button type="button" onclick="addSection('videos', false)" class="btn btn-primary">{{trans('actions.add')}}</button>
+                    <button type="button" onclick="addSection('videos', false, true)" class="btn btn-primary">{{trans('actions.add')}}</button>
                 </div>
             </div>
             <div class="form-group clearfix">

@@ -80,12 +80,12 @@
                                 <input type="text" name="videos[{{$key}}][header]" value="{{$video->header}}" class="form-control">
                             </div>
                             <div class="form-check form-check-inline">
-                                <input id="video-top" {{$video->position == "top" ? 'checked' : ''}} type="radio" value="top" name="videos[{{$key}}][position]" class="form-check-input" />
-                                <label for="video-top"  class="form-check-label"> {{trans('forms.top')}}</label>
+                                <input  {{$video->position == "top" ? 'checked' : ''}} type="radio" value="top" name="videos[{{$key}}][position]" class="form-check-input" />
+                                <label   class="form-check-label"> {{trans('forms.top')}}</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input id="video-bottom" type="radio" {{$video->position == "bottom" ? 'checked' : ''}} value="bottom" name="videos[{{$key}}][position]" class="form-check-input" />
-                                <label for="video-bottom" class="form-check-label"> {{trans('forms.bottom')}}</label>
+                                <input  type="radio" {{$video->position == "bottom" ? 'checked' : ''}} value="bottom" name="videos[{{$key}}][position]" class="form-check-input" />
+                                <label  class="form-check-label"> {{trans('forms.bottom')}}</label>
                             </div>
                         </div>
                         <br>

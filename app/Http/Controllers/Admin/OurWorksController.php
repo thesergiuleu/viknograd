@@ -47,6 +47,10 @@ class OurWorksController extends AdminBaseController
         $this->setViews();
         parent::__construct();
         $this->uploader = $uploader;
+        $this->viewData['options']  = [
+            'Сип панели' => 'Сип панели',
+            'Отзывы клиентов' => 'Отзывы клиентов'
+        ];
     }
 
     /**

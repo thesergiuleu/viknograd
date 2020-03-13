@@ -35,12 +35,38 @@ const elementsVideo = function (counter, name) {
         `<input type="text" name="${name}[${counter}][header]" class="form-control">`+
         '</div>'+
         '<div class="form-check form-check-inline">'+
-        `<input id="video-top" type="radio" value="top" name="${name}[${counter}][position]" class="form-check-input" />`+
-        '<label for="video-top" class="form-check-label"> Положение «С верху»</label>'+
+        `<input type="radio" value="top" name="${name}[${counter}][position]" class="form-check-input" />`+
+        '<label class="form-check-label"> Положение «С верху»</label>'+
         '</div>'+
         '<div class="form-check form-check-inline">'+
-        `<input id="video-bottom" type="radio" value="bottom" name="${name}[${counter}][position]" class="form-check-input" />`+
-        '<label for="video-bottom" class="form-check-label"> Положение «С Низу»</label>'+
+        `<input type="radio" value="bottom" name="${name}[${counter}][position]" class="form-check-input" />`+
+        '<label class="form-check-label"> Положение «С Низу»</label>'+
+        '</div>'+
+        '</div>'+
+        '<br>';
+};
+const elementsOurWorksVideo = function (counter, name) {
+    return '<div class="my-card">'+
+        `<input type="hidden" name="${name}[${counter}][id]">`+
+        '<div class="form-group required ">'+
+        `<span style="color: #3097d1; cursor: pointer" data-data="${name}" data-id="${counter}" onclick="removeReviewSection(this)" class="pull-right"><i class="glyphicon glyphicon-remove"></i></span>`+
+        '<label for="exampleInputName">Cсылка</label>'+
+        `<input type="text" name="${name}[${counter}][url]" class="form-control" required>`+
+        '</div>'+
+        '<div class="form-group">'+
+        '<label>Опциональный контент</label>'+
+        `<select type="text" name="${name}[${counter}][header]" class="form-control">`+
+        `<option value="Сип панели">Сип панели</option>`+
+        `<option value="Отзывы клиентов">Отзывы клиентов</option>`+
+        `</select>`+
+        `</div>`+
+        '<div class="form-check form-check-inline">'+
+        `<input type="radio" value="top" name="${name}[${counter}][position]" class="form-check-input" />`+
+        '<label class="form-check-label"> Положение «С верху»</label>'+
+        '</div>'+
+        '<div class="form-check form-check-inline">'+
+        `<input type="radio" value="bottom" name="${name}[${counter}][position]" class="form-check-input" />`+
+        '<label class="form-check-label"> Положение «С Низу»</label>'+
         '</div>'+
         '</div>'+
         '<br>';
@@ -48,7 +74,7 @@ const elementsVideo = function (counter, name) {
 function resetForm(url) {
     window.location.href = url;
 }
-function addSection(sectionType, has_summernote = true) {
+function addSection(sectionType, has_summernote = true, is_our_works = false) {
 
     const section = document.createElement('div');
     section.className           = 'col-md-12';
@@ -64,7 +90,7 @@ function addSection(sectionType, has_summernote = true) {
         case "videos":
             div                 = document.getElementById('video-div');
             inputs              = div.querySelectorAll('input[type=text]');
-            section.innerHTML   = elementsVideo(inputs.length, sectionType);
+            section.innerHTML   = is_our_works ? elementsOurWorksVideo(inputs.length, sectionType) : elementsVideo(inputs.length, sectionType);
             break;
         default:
             console.warn('No section type provided');

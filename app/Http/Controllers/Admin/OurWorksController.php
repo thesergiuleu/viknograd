@@ -26,7 +26,7 @@ class OurWorksController extends AdminBaseController
     protected $page_block = Page::OUR_WORKS;
 
     protected $gridData = [
-        "columns" => ['id', 'name', 'url'],
+        "columns" => ['name'],
         'entity' => 'our_work',
         'actionsDisplay' => [
             'edit' => 1,
@@ -67,6 +67,7 @@ class OurWorksController extends AdminBaseController
         $this->afterInitPaginateHook();
         $this->viewData['gridData'] = $this->gridData;
 
+        return redirect(route('our_work.edit' , $this->viewData['items'][0]->id . '/' . $this->page_block));
         if (request()->wantsJson()) {
             return response()->json([
                 'data' => $this->viewData['items'],

@@ -25,7 +25,7 @@ class ContactsController extends AdminBaseController
     protected $page_block = Page::CONTACTS;
 
     protected $gridData = [
-        "columns" => ['id', 'name', 'header'],
+        "columns" => ['name', 'header'],
         'entity' => 'contact',
         'actionsDisplay' => [
             'edit' => 1,

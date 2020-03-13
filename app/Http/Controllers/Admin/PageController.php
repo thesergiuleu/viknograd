@@ -28,7 +28,7 @@ class PageController extends AdminBaseController
     protected $page;
 
     protected $gridData = [
-        "columns" => ['id', 'name', 'url'],
+        "columns" => ['name', 'url'],
         'entity' => 'page',
         'actionsDisplay' => [
             'edit' => 1,

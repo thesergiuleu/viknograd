@@ -26,7 +26,7 @@ class NewsController extends AdminBaseController
     protected $page_block = Page::NEWS;
 
     protected $gridData = [
-        "columns" => ['id', 'name'],
+        "columns" => ['name'],
         'entity' => 'new',
         'actionsDisplay' => [
             'edit' => 1,

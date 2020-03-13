@@ -25,7 +25,7 @@ class JobsController extends AdminBaseController
     protected $page_block = Page::JOBS;
 
     protected $gridData = [
-        "columns" => ['id', 'name'],
+        "columns" => ['name'],
         'entity' => 'job',
         'actionsDisplay' => [
             'edit' => 1,

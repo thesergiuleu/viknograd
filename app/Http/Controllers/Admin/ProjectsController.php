@@ -24,7 +24,7 @@ class ProjectsController extends AdminBaseController
     protected $page_block = Page::PROJECTS;
 
     protected $gridData = [
-        "columns" => ['id', 'name', 'url'],
+        "columns" => ['name', 'url'],
         'entity' => 'project',
         'actionsDisplay' => [
             'edit' => 1,

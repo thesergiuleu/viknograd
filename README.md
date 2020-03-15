@@ -16,4 +16,6 @@
         php artisan key:generate
         php artisan migrate
         php artisan db:seed
+        sudo chmod -R 777 bootstrap
+        sudo chmod -R 777 storage
 

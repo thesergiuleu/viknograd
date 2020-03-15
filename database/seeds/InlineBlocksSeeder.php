@@ -11,7 +11,7 @@ class InlineBlocksSeeder extends Seeder
      */
     public function run()
     {
-        $file = file_get_contents(env('APP_URL') . '/inline_blocks.json');
+        $file = file_get_contents(database_path() . '/imports/inline_blocks.json');
         foreach (json_decode($file) as $item) {
             \App\InlineBlock::updateOrCreate(['id' => $item->id], [
                 'name' => $item->name,

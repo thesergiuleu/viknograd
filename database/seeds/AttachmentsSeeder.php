@@ -11,7 +11,7 @@ class AttachmentsSeeder extends Seeder
      */
     public function run()
     {
-        $file = file_get_contents(env('APP_URL') . '/attachments.json');
+        $file = file_get_contents(database_path() . '/imports/attachments.json');
         foreach (json_decode($file) as $item) {
             \App\Attachment::updateOrCreate(['id' => $item->id], [
                 'title' => $item->title,

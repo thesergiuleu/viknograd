@@ -11,7 +11,7 @@ class PagesSeeder extends Seeder
      */
     public function run()
     {
-        $file = file_get_contents(env('APP_URL') . '/pages.json');
+        $file = file_get_contents(database_path(). '/imports/pages.json');
         foreach (json_decode($file) as $page) {
             \App\Page::updateOrCreate(['id' => $page->id], [
                 'name' => $page->name,

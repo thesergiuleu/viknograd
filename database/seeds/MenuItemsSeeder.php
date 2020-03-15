@@ -11,7 +11,7 @@ class MenuItemsSeeder extends Seeder
      */
     public function run()
     {
-        $file = file_get_contents(env('APP_URL') . '/menu_items.json');
+        $file = file_get_contents(database_path() . '/imports/menu_items.json');
         foreach (json_decode($file) as $item) {
             \App\ApiMenuItem::updateOrCreate(['id' => $item->id], [
                 'parent_id' => $item->parent_id,

@@ -18,7 +18,7 @@ class CheckIfIsAdminRoute
     public function handle($request, Closure $next, $guard = null)
     {
         if ($request->is('admin')) {
-            return redirect('/admin/dashboard');
+            return redirect('/admin/page');
         }
 
         return $next($request);

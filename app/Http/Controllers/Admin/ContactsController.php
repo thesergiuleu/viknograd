@@ -8,8 +8,12 @@ use App\Libraries\Uploader\UploaderClass;
 use App\Page;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Response;
+use Illuminate\Routing\Redirector;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\View\View;
 
 class ContactsController extends AdminBaseController
@@ -72,6 +76,83 @@ class ContactsController extends AdminBaseController
         $this->viewData['addNewRoute'] = $this->addNewItemRoute;
         $this->setQueryString();
         return view($this->entityViews['list'], $this->viewData);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  Request $request
+     * @param  string $id
+     *
+     * @return JsonResponse|RedirectResponse|Response|Redirector
+     */
+    public function update(Request $request, $id)
+    {
+        $data = $request->all();
+        $validator = Validator::make($data, [
+            'name' => 'required|min:3'
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator->errors())->withInput($data);
+        }
+        $put  = $this->beforeUpdateHook($data);
+        $item = $this->model->findOrFail($id);
+        $item->fill($put);
+        $item->save();
+        $this->afterUpdateHook($item);
+
+        $response = [
+            'message' => $this->messages['updated'],
+            'data'    => $item->toArray(),
+        ];
+
+        if ($request->wantsJson()) {
+            return response()->json($response);
+        }
+
+        $session = session()->all();
+        $routeSuffix = session()->has('query_string') ? '?'.implode('&', $session['query_string']):'';
+        return redirect($this->redirectBack. '/' . $put['page_block'] . $routeSuffix)->with('message', [
+            'msg'  => $response['message'],
+            'type' => 'success',
+        ]);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  Request $request
+     *
+     * @return JsonResponse|RedirectResponse|Response|Redirector
+     */
+    public function store(Request $request)
+    {
+        $post = $request->all();
+        $validator = Validator::make($post, [
+            'name' => 'required|min:3'
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator->errors())->withInput($post);
+        }
+        $post = $this->beforeCreateHook($post);
+        $item = $this->model->create($post);
+
+        $this->afterCreateHook($item);
+        $response = [
+            'message' => $this->messages['created'],
+            'data'    => $item->toArray(),
+        ];
+
+        if ($request->wantsJson()) {
+            return response()->json($response);
+        }
+
+        $session = session()->all();
+        $routeSuffix = session()->has('query_string') ? '?'.implode('&', $session['query_string']):'';
+        return redirect($this->redirectBack . '/' . $post['page_block'] . $routeSuffix)->with('message', [
+            'msg'  => $response['message'],
+            'type' => 'success',
+        ]);
     }
 
     public function beforeInitPaginateHook()

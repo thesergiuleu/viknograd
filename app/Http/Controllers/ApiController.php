@@ -55,6 +55,13 @@ class ApiController extends Controller
         $page = Page::with(['attachments', 'inline_blocks', 'inline_blocks.attachments', 'videos'])->findOrFail($id);
         $page['news'] = Page::wherePageBlock(Page::NEWS)->first() ? Page::wherePageBlock(Page::NEWS)->first()->childrenFormed() : null;
 
+        $images = [];
+        $images[0]['position'] = 'top';
+        $images[0]['content']  = $page->attachments()->where('position', 'top')->get();
+        $images[1]['position'] = 'bottom';
+        $images[1]['content']  = $page->attachments()->where('position', 'bottom')->get();
+
+        $page['images'] = $images;
         foreach ($page->inline_blocks as $inline_block) {
             $inline_block->file_url = $inline_block->attachment_url;
         }

@@ -16,6 +16,7 @@
             maxHeight: null,             // set maximum height of editor
             focus: false,
             fontNames: ['Arial', 'Open Sans', 'Raleway'],
+            fontSizes: ['8', '9', '10', '11', '12', '13', '14', '15', '16', '17' , '18', '18', '20', '21', '22', '24', '26', '28', '30', '34', '38'],
             toolbar: [
                 // [groupName, [list of button]]
                 ['style', ['bold', 'italic', 'underline', 'clear']],

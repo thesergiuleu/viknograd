@@ -14,14 +14,15 @@
             height: 200,                 // set editor height
             minHeight: null,             // set minimum height of editor
             maxHeight: null,             // set maximum height of editor
-            focus: true,
-            fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', 'Carlito', 'Open Sans'],
+            focus: false,
+            fontNames: ['Arial', 'Open Sans', 'Raleway'],
             toolbar: [
                 // [groupName, [list of button]]
                 ['style', ['bold', 'italic', 'underline', 'clear']],
                 ['font', ['strikethrough', 'superscript', 'subscript']],
                 ['fontsize', ['fontsize', 'fontname']],
                 ['insert', ['picture', 'link', 'video']],
+                ['color', ['color']],
                 ['table', ['table']],
                 ['color', ['forecolor', 'backcolor']],
                 ['para', ['ul', 'ol', 'paragraph']],

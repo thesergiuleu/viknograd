@@ -104,12 +104,14 @@ function addSection(sectionType, has_summernote = true, is_our_works = false) {
             height: 200,                 // set editor height
             minHeight: null,             // set minimum height of editor
             maxHeight: null,             // set maximum height of editor
-            fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', 'Carlito'],
+            focus: false,
+            fontNames: ['Arial', 'Open Sans', 'Raleway'],
             toolbar: [
                 ['style', ['bold', 'italic', 'underline', 'clear']],
                 ['font', ['strikethrough', 'superscript', 'subscript']],
                 ['fontsize', ['fontsize', 'fontname']],
                 ['insert', ['picture', 'link', 'video']],
+                ['color', ['color']],
                 ['table', ['table']],
                 ['color', ['forecolor', 'backcolor']],
                 ['para', ['ul', 'ol', 'paragraph']],

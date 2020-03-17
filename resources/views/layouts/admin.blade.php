@@ -3,6 +3,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{@env('APP_NAME')}} admin panel - @yield('title')</title>
     @section('scripts')
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
         <link rel="stylesheet" type="text/css"
               href="{{ asset('assets/libraries/bootstrap-datetimepicker-master/build/css/bootstrap-datetimepicker.min.css') }}"/>
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/app.css') }}"/>

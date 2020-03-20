@@ -17,7 +17,7 @@
             </div>
             <br>
             <div class="form-control-file">
-                <img style="height: 400px; width: 100%;" src="{{asset('storage/'.$fileInstance->file)}}" alt="" class="img-rounded fluid-img">
+                <img style="height: 400px; width: 100%;" src="{{asset('assets/'.$fileInstance->file)}}" alt="" class="img-rounded fluid-img">
             </div>
             @if($has_input)
                 <div class="form-check form-check-inline">

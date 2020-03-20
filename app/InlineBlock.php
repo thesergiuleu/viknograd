@@ -52,6 +52,6 @@ class InlineBlock extends Model
 
     public function getAttachmentUrlAttribute()
     {
-        return $this->attachments->isNotEmpty() ?  config('app.url') . '/storage/' . $this->attachments[0]->file : "";
+        return $this->attachments->isNotEmpty() ?  config('app.url') . '/assets/' . $this->attachments[0]->file : "";
     }
 }

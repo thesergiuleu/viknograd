@@ -29,3 +29,4 @@ Route::get('menu-items', 'ApiController@menuItems');
 Route::get('inline-blocks', 'ApiController@inlineBlocks');
 Route::get('attachments', 'ApiController@attachments');
 Route::get('videos', 'ApiController@videos');
+Route::get('static_content', 'ApiController@staticContent');

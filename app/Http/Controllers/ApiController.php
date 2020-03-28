@@ -6,6 +6,7 @@ use App\ApiMenuItem;
 use App\Attachment;
 use App\InlineBlock;
 use App\Page;
+use App\StaticContent;
 use App\Video;
 use Illuminate\Http\Request;
 
@@ -106,5 +107,18 @@ class ApiController extends Controller
             $data[$item->id]['content']     = array_values($children);
         }
         return $data;
+    }
+
+    public function staticContent()
+    {
+        $content = StaticContent::all();
+        $data = [];
+        foreach ($content as $key => $item) {
+            $values = $content->where('group_by', $item->group_by);
+            $data[$key]['name'] = $item->group_by;
+            $data[$key]['list'] = $values;
+        }
+
+        return array_values($data);
     }
 }

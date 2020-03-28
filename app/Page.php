@@ -40,6 +40,14 @@ use Illuminate\Support\Carbon;
  * @property-read int|null $videos_count
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Page whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Page wherePageBlock($value)
+ * @property string|null $page_header
+ * @property int|null $parent_id
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Page[] $children
+ * @property-read int|null $children_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Attachment[] $thumbnails
+ * @property-read int|null $thumbnails_count
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Page wherePageHeader($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Page whereParentId($value)
  */
 class Page extends Model
 {

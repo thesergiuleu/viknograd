@@ -23,6 +23,13 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\ApiMenuItem whereParentId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\ApiMenuItem whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property int|null $position
+ * @property int|null $top_position
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\ApiMenuItem[] $children
+ * @property-read int|null $children_count
+ * @property-read mixed $page_name
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\ApiMenuItem wherePosition($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\ApiMenuItem whereTopPosition($value)
  */
 class ApiMenuItem extends Model
 {

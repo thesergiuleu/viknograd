@@ -1,0 +1,71 @@
+{
+    "static-content":
+    [
+        {
+            "title": "Телефон",
+            "description": "+373 22 753 588",
+            "alias": "phone",
+            "group_by": "Общее"
+        },
+        {
+            "title": "Мотто",
+            "description": "Все для производства окон из ПВХ и алюминия",
+            "alias": "motto",
+            "group_by": "Общее"
+        },
+        {
+            "title": "Почта",
+            "description": "INFO@VIKNOGRAD.MD",
+            "alias": "email",
+            "group_by": "Общее"
+        },
+        {
+            "title": "КИШИНЕВ",
+            "description": "КИШИНЕВ:+373(22)75-35-88",
+            "alias": "chisinau",
+            "group_by": "КОНТАКТЫ"
+        },
+        {
+            "title": "БЕЛЬЦЫ",
+            "description": "БЕЛЬЦЫ:+373(231)4-79-65",
+            "alias": "balti",
+            "group_by": "КОНТАКТЫ"
+        },
+        {
+            "title": "ТИРАСПОЛЬ",
+            "description": "ТИРАСПОЛЬ:+(373533)76417",
+            "alias": "tiraspol",
+            "group_by": "КОНТАКТЫ"
+        },
+        {
+            "title": "РУМЫНИЯ",
+            "description": "РУМЫНИЯ:(+40)213673200",
+            "alias": "romania",
+            "group_by": "КОНТАКТЫ"
+        },
+        {
+            "title": "Пн-Чт",
+            "description": "Пн-Чт: с 08:00 до 18:00",
+            "alias": "luniJoi",
+            "group_by": "РЕЖИМ РАБОТЫ"
+        },
+        {
+            "title": "Пт",
+            "description": "Пт: с 8:00 до 17:00",
+            "alias": "vineri",
+            "group_by": "РЕЖИМ РАБОТЫ"
+        },
+        {
+            "title": "Сб",
+            "description": "Сб: с 9:00 до 13:00",
+            "alias": "simbata",
+            "group_by": "РЕЖИМ РАБОТЫ"
+        },
+        {
+            "title": "Вс",
+            "description": "Вс - Выходной",
+            "alias": "duminica",
+            "group_by": "РЕЖИМ РАБОТЫ"
+        }
+    ]
+}

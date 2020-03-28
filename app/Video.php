@@ -23,6 +23,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Video whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Video whereUrl($value)
  * @mixin \Eloquent
+ * @property string|null $header
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Video whereHeader($value)
  */
 class Video extends Model
 {

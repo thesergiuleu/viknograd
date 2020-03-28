@@ -45,6 +45,13 @@ return [
         'name'               => 'Название',
         'body'               => 'Контент',
     ],
+    'static_content' => [
+        'title'         => 'Название',
+        'description'   => 'Контент',
+        'alias'         => 'Псевдоним',
+        'group_by'      => 'Группировать по',
+        'active'        => 'Статус',
+    ],
     'search_placeholder' => 'Поиск',
     'top' => 'Положение «С верху»',
     'bottom' => 'Положение «С Низу»'

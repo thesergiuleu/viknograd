@@ -86,5 +86,15 @@ Route::group(['middleware' => ['admin'], 'prefix' => 'admin'], function () {
 
         Route::post('/menu_item/position', 'Admin\ApiMenuItemsController@changeMenuPosition')->name('change_menu_position');
         Route::get('/menu_item/{page_block?}', 'Admin\ApiMenuItemsController@index')->name('menu_item');
+
+
+        //our works
+        Route::get('/static_content/add/{page_block?}', "Admin\StaticContentController@add")->name('static_content.add');
+        Route::get('/static_content/edit/{id}/{page_block?}', 'Admin\StaticContentController@edit')->name('static_content.edit')->where('id', '[0-9]+');
+        Route::get('/static_content/show/{id}', 'Admin\StaticContentController@show')->name('static_content.show')->where('id', '[0-9]+');
+        Route::post('/static_content', 'Admin\StaticContentController@store')->name('static_content.store');
+        Route::put('/static_content/update/{id}', 'Admin\StaticContentController@update')->name('static_content.update')->where('id', '[0-9]+');
+        Route::delete('/static_content/delete/{id}', 'Admin\StaticContentController@destroy')->name('static_content.delete')->where('id', '[0-9]+');
+        Route::get('/static_content/{page_block?}', 'Admin\StaticContentController@index')->name('static_content');
     });
 });

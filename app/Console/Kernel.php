@@ -19,6 +19,7 @@ class Kernel extends ConsoleKernel
         Commands\ImportPanelsOrder::class,
         Commands\ImportCorporate::class,
         Commands\ImportUser::class,
+        Commands\ProductionStaticContentMigration::class,
 
     ];
 

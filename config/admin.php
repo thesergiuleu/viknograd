@@ -10,5 +10,6 @@ return [
         ['title' => 'Новости', 'ext' => 'new', 'id' => Page::NEWS],
         ['title' => 'Вакансии', 'ext' => 'job', 'id' => Page::JOBS],
         ['title' => 'Контакты', 'ext' => 'contact', 'id' => Page::CONTACTS],
+        ['title' => 'Статичный контент', 'ext' => 'static_content', 'id' => null],
     ]
 ];

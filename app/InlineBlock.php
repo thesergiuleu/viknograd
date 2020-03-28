@@ -33,6 +33,8 @@ use Illuminate\Support\Carbon;
  * @property string|null $url
  * @method static \Illuminate\Database\Eloquent\Builder|\App\InlineBlock whereUrl($value)
  * @property-read mixed $attachment_url
+ * @property string|null $header
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\InlineBlock whereHeader($value)
  */
 class InlineBlock extends Model
 {

@@ -116,7 +116,7 @@ class ApiController extends Controller
         foreach ($content->unique('group_by') as $key => $item) {
             $values = $content->where('group_by', $item->group_by);
             $data[$key]['name'] = $item->group_by;
-            $data[$key]['list'] = $values;
+            $data[$key]['list'] = $values->values();
         }
 
         return array_values($data);

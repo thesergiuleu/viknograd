@@ -111,7 +111,7 @@ class ApiController extends Controller
 
     public function staticContent()
     {
-        $content = StaticContent::all();
+        $content = StaticContent::whereIsActive(1)->get();
         $data = [];
         foreach ($content->unique('group_by') as $key => $item) {
             $values = $content->where('group_by', $item->group_by);

@@ -8,7 +8,7 @@
             </div>
         @endif
     @foreach($fileInstances as $key => $fileInstance)
-        <div class="col-md-4">
+        <div class="col-md-{{$columns}}">
             <br>
             <div class="form-group">
                 <div class="pull-left">

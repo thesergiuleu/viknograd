@@ -31,7 +31,8 @@
                             @component('admin.form_elements.simple_file_input', [
                                  'fileInstances' =>  false,
                                  'inputName' => "attachments",
-                                 'has_input' => false
+                                 'has_input' => false,
+                                 'columns' => 4
                                  ])
                             @endcomponent
                         </div>

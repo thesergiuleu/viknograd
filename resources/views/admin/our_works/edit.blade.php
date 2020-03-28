@@ -59,6 +59,7 @@
                      'fileInstances' =>  $item->attachments->isNotEmpty() ? $item->attachments : false,
                      'inputName' => 'attachments[]',
                      'has_input' => true,
+                     'columns' => 4
                      ])
 
                     @endcomponent

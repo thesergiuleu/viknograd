@@ -143,6 +143,7 @@ function removeFile(element) {
         dataType: 'json'
     });
     request.done(function () {
+        console.log('Done!');
         window.location.reload();
     });
     request.fail(function (jqXHR, resp) {

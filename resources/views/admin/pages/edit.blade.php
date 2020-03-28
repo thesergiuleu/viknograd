@@ -59,6 +59,7 @@
                      'fileInstances' =>  $item->attachments->isNotEmpty() ? $item->attachments : false,
                      'inputName' => 'attachments[]',
                      'has_input' => true,
+                     'columns' => 4
                      ])
 
                     @endcomponent
@@ -128,6 +129,7 @@
                                      'fileInstances' =>  $inlineBlock->attachments->isNotEmpty() ? $inlineBlock->attachments : false,
                                      'inputName' => "inline_blocks[$key][attachments]",
                                      'has_input' => false,
+                                     'columns' => 4
                                      ])
                                 @endcomponent
                             </div>

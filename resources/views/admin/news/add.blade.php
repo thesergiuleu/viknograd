@@ -55,6 +55,7 @@
                      'fileInstances' =>  false,
                      'inputName' => 'thumbnail',
                      'has_input' => true,
+                     'columns' => 4
                      ])
 
                     @endcomponent
@@ -84,6 +85,7 @@
                      'fileInstances' =>  false,
                      'inputName' => 'attachments[]',
                      'has_input' => true,
+                     'columns' => 4
                      ])
 
                     @endcomponent

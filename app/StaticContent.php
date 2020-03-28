@@ -44,4 +44,5 @@ class StaticContent extends Model
     const CONTACTS      = 'КОНТАКТЫ';
     const GENERIC       = 'РЕЖИМ РАБОТЫ';
     const WORK_HOURS    = 'Общее';
+    const ID            = 999;
 }

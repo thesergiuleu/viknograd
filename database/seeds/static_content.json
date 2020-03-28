@@ -3,7 +3,7 @@
     [
         {
             "title": "Телефон",
-            "description": "+373 22 753 588",
+            "description": "<a href=\"tel: +373 22 753 588\">+373 22 753 588</a>",
             "alias": "phone",
             "group_by": "Общее"
         },
@@ -15,31 +15,37 @@
         },
         {
             "title": "Почта",
-            "description": "INFO@VIKNOGRAD.MD",
+            "description": "<a href=\"mailto: info@viknograd.md\" type=\"email\">info@viknograd.md</a>",
             "alias": "email",
             "group_by": "Общее"
         },
         {
             "title": "КИШИНЕВ",
-            "description": "КИШИНЕВ:+373(22)75-35-88",
+            "description": "КИШИНЕВ:<a href=\"tel:+373(22)75-35-88\">+373(22)75-35-88</a>",
             "alias": "chisinau",
             "group_by": "КОНТАКТЫ"
         },
         {
             "title": "БЕЛЬЦЫ",
-            "description": "БЕЛЬЦЫ:+373(231)4-79-65",
+            "description": "БЕЛЬЦЫ:<a href=\"tel:+373(231)4-79-65\">+373(231)4-79-65</a>",
             "alias": "balti",
             "group_by": "КОНТАКТЫ"
         },
         {
             "title": "ТИРАСПОЛЬ",
-            "description": "ТИРАСПОЛЬ:+(373533)76417",
+            "description": "ТИРАСПОЛЬ:<a href=\"tel:+(373533)76417\">+(373533)76417</a>",
             "alias": "tiraspol",
             "group_by": "КОНТАКТЫ"
         },
         {
+            "title": "КАГУЛ",
+            "description": "КАГУЛ:<a href=\"tel:+(373 299)3-28-60\">+(373 299)3-28-60</a>",
+            "alias": "cahul",
+            "group_by": "КОНТАКТЫ"
+        },
+        {
             "title": "РУМЫНИЯ",
-            "description": "РУМЫНИЯ:(+40)213673200",
+            "description": "РУМЫНИЯ:<a href=\"tel:(+40)213673200\">(+40)213673200</a>",
             "alias": "romania",
             "group_by": "КОНТАКТЫ"
         },

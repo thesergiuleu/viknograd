@@ -112,13 +112,16 @@ class ApiController extends Controller
     public function staticContent()
     {
         $content = StaticContent::whereIsActive(1)->get();
-        $data = [];
+        $arr = [];
+        $file = Attachment::whereEntityType(StaticContent::class)->whereEntityId(StaticContent::ID)->first();
+        $data['banner'] = $file ?  asset('assets') . '/' . $file->file : null;
         foreach ($content->unique('group_by') as $key => $item) {
             $values = $content->where('group_by', $item->group_by);
-            $data[$key]['name'] = $item->group_by;
-            $data[$key]['list'] = $values->values();
+            $arr[$key]['name'] = $item->group_by;
+            $arr[$key]['list'] = $values->values();
         }
+        $data['static_content'] = array_values($arr);
 
-        return array_values($data);
+        return $data;
     }
 }

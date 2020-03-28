@@ -113,7 +113,7 @@ class ApiController extends Controller
     {
         $content = StaticContent::all();
         $data = [];
-        foreach ($content as $key => $item) {
+        foreach ($content->unique('group_by') as $key => $item) {
             $values = $content->where('group_by', $item->group_by);
             $data[$key]['name'] = $item->group_by;
             $data[$key]['list'] = $values;
